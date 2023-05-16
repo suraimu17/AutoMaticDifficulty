@@ -19,7 +19,6 @@ public class TestEnemyController : MonoBehaviour, IEnemyController
     {
         if (collision.tag == "Base") 
         {
-            Debug.Log("Base");
             baseHP = collision.GetComponent<BaseHP>();
             if (baseHP == null) return;
 
@@ -28,15 +27,4 @@ public class TestEnemyController : MonoBehaviour, IEnemyController
         }
     }
 
-    /*private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.tag == "Base")
-        {
-            baseHP = collision.GetComponent<BaseHP>();
-            if (baseHP == null) return;
-
-            baseHP.DecreaseHp();
-            Destroy(this);
-        }
-    }*/
 }
