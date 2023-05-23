@@ -8,10 +8,6 @@ public class FacilitySearch : MonoBehaviour
 
     private GameObject targetEnemy;
 
-    private void Update()
-    {
-        FindNearerstEnemy();
-    }
     public GameObject FindNearerstEnemy() 
     {
         if (enemyList == null) return null;
@@ -20,6 +16,7 @@ public class FacilitySearch : MonoBehaviour
         {
             var distance = Vector3.Distance(this.transform.position, enemy.transform.position);
             Debug.Log(enemy);
+            if (targetEnemy == null) return null;
             if (distance < Vector3.Distance(this.transform.position, targetEnemy.transform.position))
             {
 
