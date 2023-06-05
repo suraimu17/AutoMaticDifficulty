@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx.Triggers;
 using UniRx;
+using Enemy.Test;
 
 public class EnemyGenerateManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class EnemyGenerateManager : MonoBehaviour
         var number = Random.Range(0, generatePoint.Length);
 
         enemy.GetComponent<TestEnemyController>().target = baseTransform;
+        if (enemy.GetComponent<TestEnemyController>().target == null) Debug.Log("nullnull");
         Instantiate(enemy, generatePoint[number].position, Quaternion.identity);
 
     }

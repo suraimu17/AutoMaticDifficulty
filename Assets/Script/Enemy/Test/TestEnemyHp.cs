@@ -1,32 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UniRx;
-using UniRx.Triggers;
 
-public class TestEnemyHp : MonoBehaviour,IEnemyHp
+namespace Enemy.Test
 {
-    public int enemyHp { private set;  get; } = 10;
+    public class TestEnemyHp : MonoBehaviour, IEnemyHp
+    {
+        public int enemyHp { private set; get; } = baseHp;
+        private const int baseHp = 10;
+        public bool IsDead => enemyHp <= 0;
+        private void Start()
+        {
+            DeathObservable();
+            HpBarObservable();
+        }
+        public void DecreaseHp(int facilityPower)
+        {
+            enemyHp -= facilityPower;
+            Debug.Log("ダメージ");
+        }
 
-    public bool IsDead => enemyHp <= 0;
-    private void Start()
-    {
-        DeathObservable();
-    }
-    public void DecreaseHp(int facilityPower) 
-    {
-        enemyHp -= facilityPower;
-        Debug.Log("ダメージ");
-    }
+        private void DeathObservable()
+        {
+            this.ObserveEveryValueChanged(_ => IsDead)
+                .Where(_ => IsDead == true)
+                .Subscribe(_ =>
+                {
+                    Destroy(this.gameObject);
+                })
+                .AddTo(this);
+        }
 
-    private void DeathObservable() 
-    {
-        this.ObserveEveryValueChanged(_ => IsDead)
-            .Where(_ => IsDead==true)
-            .Subscribe(_ =>
-            {
-                Destroy(this.gameObject);
-            })
-            .AddTo(this);
+        private void HpBarObservable()//TODO 後で分割する
+        {
+            GameObject child = transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;//TODO　後で探し方変える
+
+            if (child == null) Debug.Log("childnull");
+            this.ObserveEveryValueChanged(_ => enemyHp)
+                .Where(_ => enemyHp > 0)
+                .Subscribe(_ =>
+                {
+                    if (!child.activeSelf) child.SetActive(true);
+
+                    var hpBar = child.GetComponent<Slider>();
+                    hpBar.value = (float)enemyHp / (float)baseHp;
+                    Debug.Log((float)enemyHp / (float)baseHp);
+
+                })
+                .AddTo(this);
+        }
     }
 }

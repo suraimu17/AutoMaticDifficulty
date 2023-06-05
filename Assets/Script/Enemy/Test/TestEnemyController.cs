@@ -3,43 +3,38 @@ using UniRx;
 using UniRx.Triggers;
 using Base;
 
-public class TestEnemyController : MonoBehaviour, IEnemyController
+namespace Enemy.Test
 {
-    protected TestEnemyMover enemyMover;
-    private IEnemyHp testEnemyHp;
-    private BaseHP baseHP;
-
-    public Transform target;
-    private void Start()
+    public class TestEnemyController : MonoBehaviour, IEnemyController
     {
-        enemyMover = GetComponent<TestEnemyMover>();
-        testEnemyHp = GetComponent<IEnemyHp>();
+        protected TestEnemyMover enemyMover;
+        private IEnemyHp testEnemyHp;
+        private BaseHP baseHP;
 
-        //ダメージ判定処理 もしくはHPバーによるHp残量処理
-        this.ObserveEveryValueChanged(_ => testEnemyHp.enemyHp)
-            .Subscribe(_ =>
-            {
-
-            })
-            .AddTo(this);
-    }
-
-    private void Update()
-    {
-        enemyMover.EnemyMove(target);
-        
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Base") 
+        public Transform target;
+        private void Start()
         {
-            baseHP = collision.GetComponent<BaseHP>();
-            if (baseHP == null) return;
+            enemyMover = GetComponent<TestEnemyMover>();
+            testEnemyHp = GetComponent<IEnemyHp>();
 
-            baseHP.DecreaseHp();
-            Destroy(gameObject);
         }
-    }
 
+        private void Update()
+        {
+            enemyMover.EnemyMove(target);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.tag == "Base")
+            {
+                baseHP = collision.GetComponent<BaseHP>();
+                if (baseHP == null) return;
+
+                baseHP.DecreaseHp();
+                Destroy(gameObject);
+            }
+        }
+
+    }
 }

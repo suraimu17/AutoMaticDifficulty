@@ -1,17 +1,18 @@
 using UnityEngine;
 using NavMesh2D;
 
-public class TestEnemyMover : MonoBehaviour
+namespace Enemy.Test
 {
-    public NavMeshAgent2D agent;
-    //[SerializeField] Transform target;
-    private void Start()
+    public class TestEnemyMover : MonoBehaviour
     {
-        agent = GetComponent<NavMeshAgent2D>();
-    }
-    public void EnemyMove(Transform target)
-    {
-        //agent.SetDestination(target.position);
-        agent.destination = target.position;
+        public NavMeshAgent2D agent;
+        private void Start()
+        {
+            agent = GetComponent<NavMeshAgent2D>();
+        }
+        public void EnemyMove(Transform target)
+        {
+            agent.destination = target.position;
+        }
     }
 }
