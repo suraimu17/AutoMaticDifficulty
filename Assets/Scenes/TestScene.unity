@@ -272,7 +272,9 @@ MonoBehaviour:
   - {fileID: 2013111112}
   - {fileID: 731520768}
   - {fileID: 40261970}
-  enemy: {fileID: 1178991348594108253, guid: f6f5c45acdfeae14d905d9bd6cff9217, type: 3}
+  enemy:
+  - {fileID: 5074999082415643480, guid: a26059958d531f144ab78ef2d0d72d50, type: 3}
+  - {fileID: 1178991348594108253, guid: f6f5c45acdfeae14d905d9bd6cff9217, type: 3}
 --- !u!4 &609471678
 Transform:
   m_ObjectHideFlags: 0
