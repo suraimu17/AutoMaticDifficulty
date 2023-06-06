@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Enemy;
 
 namespace NavMesh2D
 {

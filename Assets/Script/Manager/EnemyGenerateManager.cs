@@ -9,7 +9,7 @@ public class EnemyGenerateManager : MonoBehaviour
 {
     [SerializeField] Transform baseTransform;
     [SerializeField] Transform[] generatePoint;
-    [SerializeField] GameObject enemy;
+    [SerializeField] GameObject[] enemy;
 
     private float generateSpan = 2.0f;
     private void Start()
@@ -20,9 +20,11 @@ public class EnemyGenerateManager : MonoBehaviour
     {
         var number = Random.Range(0, generatePoint.Length);
 
-        enemy.GetComponent<TestEnemyController>().target = baseTransform;
-        if (enemy.GetComponent<TestEnemyController>().target == null) Debug.Log("nullnull");
-        Instantiate(enemy, generatePoint[number].position, Quaternion.identity);
+        var enemyNum = Random.Range(0, enemy.Length);
+
+        enemy[enemyNum].GetComponent<TestEnemyController>().target = baseTransform;
+        if (enemy[enemyNum].GetComponent<TestEnemyController>().target == null) Debug.Log("nullnull");
+        Instantiate(enemy[enemyNum], generatePoint[number].position, Quaternion.identity);
 
     }
     private void GenerateObservable() 

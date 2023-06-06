@@ -8,11 +8,12 @@ namespace Enemy.Test
 {
     public class TestEnemyHp : MonoBehaviour, IEnemyHp
     {
-        public int enemyHp { private set; get; } = baseHp;
-        private const int baseHp = 10;
+        public int enemyHp { private set; get; }
+        [SerializeField]private int baseHp;
         public bool IsDead => enemyHp <= 0;
         private void Start()
         {
+            enemyHp = baseHp;
             DeathObservable();
             HpBarObservable();
         }
@@ -39,7 +40,7 @@ namespace Enemy.Test
 
             if (child == null) Debug.Log("childnull");
             this.ObserveEveryValueChanged(_ => enemyHp)
-                .Where(_ => enemyHp > 0)
+                .Where(_ => enemyHp !=baseHp)//Å‰‚É”½‰ž‚µ‚È‚¢‚æ‚¤‚É
                 .Subscribe(_ =>
                 {
                     if (!child.activeSelf) child.SetActive(true);

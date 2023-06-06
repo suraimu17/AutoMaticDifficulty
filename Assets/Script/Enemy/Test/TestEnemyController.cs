@@ -12,6 +12,7 @@ namespace Enemy.Test
         private BaseHP baseHP;
 
         public Transform target;
+
         private void Start()
         {
             enemyMover = GetComponent<TestEnemyMover>();
