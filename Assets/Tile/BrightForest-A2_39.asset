@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Base
+  m_Name: BrightForest-A2_39
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -221743194, guid: 42de1cc69d433c5429cd545055607b18, type: 3}
-  m_Color: {r: 0.43873262, g: 0.5350696, b: 0.9811321, a: 1}
+  m_Sprite: {fileID: 1661717553, guid: 42de1cc69d433c5429cd545055607b18, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
     e01: 0

@@ -7,7 +7,7 @@ using Enemy.Test;
 
 public class EnemyGenerateManager : MonoBehaviour
 {
-    [SerializeField] Transform baseTransform;
+    [SerializeField] Transform baseTransform;//Serialize‚ğÁ‚·‚ÆƒoƒO‚é
     [SerializeField] Transform[] generatePoint;
     [SerializeField] GameObject[] enemy;
 

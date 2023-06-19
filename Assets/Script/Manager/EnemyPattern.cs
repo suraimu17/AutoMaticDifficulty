@@ -11,9 +11,13 @@ public class EnemyPattern : MonoBehaviour
 
 
 
-    private bool GeneratePattern(GameObject Enemy1,GameObject Enemy2) 
+    private bool TankPattern(GameObject TankEnemy,GameObject Enemy,int num) //async‚É‚·‚é
     {
-        
+        //Instantiate(TankEnemy, this.transform.position,  Quaternion.identity);
+
+        //await 
+
+
 
         return true;
     }

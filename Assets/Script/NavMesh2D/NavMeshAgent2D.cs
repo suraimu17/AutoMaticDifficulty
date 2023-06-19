@@ -8,7 +8,7 @@ namespace NavMesh2D
     {
         [Header("Steering")]
         public float speed = 1.0f;
-        public float stoppingDistance = 0;
+        private float stoppingDistance = 0;
 
         [HideInInspector]//常にUnityエディタから非表示
         private Vector2 trace_area = Vector2.zero;
