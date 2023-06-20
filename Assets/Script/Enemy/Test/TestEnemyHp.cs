@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using Manager;
+
 
 namespace Enemy.Test
 {
@@ -11,6 +13,8 @@ namespace Enemy.Test
         public int enemyHp { private set; get; }
         [SerializeField]private int baseHp;
         public bool IsDead => enemyHp <= 0;
+
+        private CoinManager coinManager => CoinManager.Instance;
         private void Start()
         {
             enemyHp = baseHp;
@@ -29,6 +33,7 @@ namespace Enemy.Test
                 .Where(_ => IsDead == true)
                 .Subscribe(_ =>
                 {
+                    coinManager.DropCoin(1);
                     Destroy(this.gameObject);
                 })
                 .AddTo(this);

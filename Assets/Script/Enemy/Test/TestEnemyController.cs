@@ -11,7 +11,9 @@ namespace Enemy.Test
         private IEnemyHp testEnemyHp;
         private BaseHP baseHP;
 
+        
         public Transform target;
+        public int coinNum = 1;
 
         private void Start()
         {
