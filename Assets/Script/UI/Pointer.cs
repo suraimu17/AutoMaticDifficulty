@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx.Triggers;
@@ -11,7 +10,9 @@ public class Pointer : MonoBehaviour
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private GameObject chara;
 
-    
+    //キャラの場合
+    private float AdjustX = 0.4f;
+    private float AdjustY = 0.5f;
     private TileBase CurrentPutTile;
     private void Start()
     {
@@ -29,21 +30,23 @@ public class Pointer : MonoBehaviour
 
                 //タイルマップじゃなくてもキャラでも出来そう。
                 Vector3Int grid = tilemap.WorldToCell(mouse_position);
-                //キャラの場合
-                // Vector3 gridChara = tilemap.WorldToCell(mouse_position);
+
                 Debug.Log(grid);
-                //キャラの場合
-               // Instantiate(chara, grid, Quaternion.identity);
+                /*
                 if (tilemap.HasTile(grid)) 
                 {
-                    //キャラの場合
-                    //Instantiate(chara, gridChara, Quaternion.identity);
-
                     
                     //現在選ばれているtileを入れる
                     CurrentPutTile = tile;
                     tilemap.SetTile(grid, CurrentPutTile);
 
+                }*/
+                //キャラの場合
+                Vector3 gridChara = tilemap.WorldToCell(mouse_position);
+                if (tilemap.HasTile(grid)) 
+                {
+                    gridChara = new Vector3(gridChara.x +AdjustX, gridChara.y +AdjustY, gridChara.z);
+                    Instantiate(chara, gridChara, Quaternion.identity);
                 }
             })
             .AddTo(this);

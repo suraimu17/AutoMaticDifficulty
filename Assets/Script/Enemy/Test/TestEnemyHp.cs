@@ -13,6 +13,7 @@ namespace Enemy.Test
         public int enemyHp { private set; get; }
         [SerializeField]private int baseHp;
         public bool IsDead => enemyHp <= 0;
+        private int coinNum=> GetComponent<TestEnemyController>().coinNum;
 
         private CoinManager coinManager => CoinManager.Instance;
         private void Start()
@@ -33,7 +34,8 @@ namespace Enemy.Test
                 .Where(_ => IsDead == true)
                 .Subscribe(_ =>
                 {
-                    coinManager.DropCoin(1);
+                    //Dropˆ—//‰Šú‚Å”½‰‚µ‚Ä‚µ‚Ü‚¤
+                    coinManager.DropCoin(coinNum);
                     Destroy(this.gameObject);
                 })
                 .AddTo(this);

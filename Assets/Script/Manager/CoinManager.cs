@@ -38,6 +38,7 @@ namespace Manager
         public void DropCoin(int DropNum)
         {
             CurrentCoin += DropNum;
+            Debug.Log("coin"+CurrentCoin);
         }
     }
 }

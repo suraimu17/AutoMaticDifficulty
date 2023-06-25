@@ -30,7 +30,6 @@ public class TestFacilityController:MonoBehaviour,IFacilityController
             .ThrottleFirst(System.TimeSpan.FromSeconds(1))
             .Subscribe(_ =>
             {
-                Debug.Log("UŒ‚ŠJn");
                 //targetEnemy = facilitySearch.FindNearerstEnemy();
                 if (targetEnemy == null) return;
                 Debug.Log("“G‚Í‚¢‚½");
