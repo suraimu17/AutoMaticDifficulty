@@ -20,18 +20,16 @@ namespace Manager
             DontDestroyOnLoad(gameObject);
         }
 
-        private void BuyFacility(int price)
+        public bool BuyFacility(int price)
         {
             if (CurrentCoin - price < 0)
             {
                 Debug.Log("‚¨‹à‘«‚è‚È‚¢‚æ");
-                return;
+                return false;
             }
+            CurrentCoin -= price;
 
-            //Ž{Ý‚ð’u‚­ˆ—
-
-
-
+            return true;
         }
 
         // “G‚É‚Â‚¯‚éˆ—

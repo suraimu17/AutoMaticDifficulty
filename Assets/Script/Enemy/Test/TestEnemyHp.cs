@@ -15,7 +15,7 @@ namespace Enemy.Test
         public bool IsDead => enemyHp <= 0;
         private int coinNum=> GetComponent<TestEnemyController>().coinNum;
 
-        private CoinManager coinManager => CoinManager.Instance;
+        //private CoinManager coinManager => CoinManager.Instance;
         private void Start()
         {
             enemyHp = baseHp;
@@ -35,8 +35,8 @@ namespace Enemy.Test
                 .Subscribe(_ =>
                 {
                     //Dropˆ—//‰Šú‚Å”½‰‚µ‚Ä‚µ‚Ü‚¤
-                    coinManager.DropCoin(coinNum);
                     Destroy(this.gameObject);
+                    CoinManager.Instance.DropCoin(coinNum);
                 })
                 .AddTo(this);
         }
