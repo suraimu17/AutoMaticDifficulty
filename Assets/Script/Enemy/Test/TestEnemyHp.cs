@@ -27,7 +27,7 @@ namespace Enemy.Test
             enemyHp -= facilityPower;
             Debug.Log("ƒ_ƒ[ƒW");
 
-            if (enemyHp <= 0) coinManager.DropCoin(1);
+            if (enemyHp <= 0) coinManager.DropCoin(coinNum);
         }
 
         private void DeathObservable()
@@ -36,9 +36,7 @@ namespace Enemy.Test
                 .Where(_ => IsDead == true)
                 .Subscribe(_ =>
                 {
-                    //Dropˆ—//‰Šú‚Å”½‰‚µ‚Ä‚µ‚Ü‚¤
                     Destroy(this.gameObject);
-
                 })
                 .AddTo(this);
         }
@@ -56,7 +54,6 @@ namespace Enemy.Test
 
                     var hpBar = child.GetComponent<Slider>();
                     hpBar.value = (float)enemyHp / (float)baseHp;
-                    Debug.Log((float)enemyHp / (float)baseHp);
 
                 })
                 .AddTo(this);
