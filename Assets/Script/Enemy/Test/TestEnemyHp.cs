@@ -15,7 +15,7 @@ namespace Enemy.Test
         public bool IsDead => enemyHp <= 0;
         private int coinNum=> GetComponent<TestEnemyController>().coinNum;
 
-        //private CoinManager coinManager => CoinManager.Instance;
+        private CoinManager coinManager => CoinManager.Instance;
         private void Start()
         {
             enemyHp = baseHp;
@@ -26,6 +26,8 @@ namespace Enemy.Test
         {
             enemyHp -= facilityPower;
             Debug.Log("É_ÉÅÅ[ÉW");
+
+            if (enemyHp <= 0) coinManager.DropCoin(1);
         }
 
         private void DeathObservable()
@@ -36,7 +38,7 @@ namespace Enemy.Test
                 {
                     //Dropèàóù//èâä˙Ç≈îΩâûÇµÇƒÇµÇ‹Ç§
                     Destroy(this.gameObject);
-                    CoinManager.Instance.DropCoin(coinNum);
+
                 })
                 .AddTo(this);
         }

@@ -10,7 +10,7 @@ namespace Base {
         public void DecreaseHp ()
         {
             baseHp--;
-            Debug.Log(baseHp);
+            //Debug.Log(baseHp);
         }
     }
 }
