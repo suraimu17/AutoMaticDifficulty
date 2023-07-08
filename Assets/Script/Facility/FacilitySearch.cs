@@ -15,13 +15,12 @@ public class FacilitySearch : MonoBehaviour
         foreach (GameObject enemy in enemyList) 
         {
             var distance = Vector3.Distance(this.transform.position, enemy.transform.position);
-            Debug.Log(enemy);
+            //Debug.Log(enemy);
             if (targetEnemy == null) return null;
             if (distance < Vector3.Distance(this.transform.position, targetEnemy.transform.position))
             {
 
                 targetEnemy = enemy;
-                Debug.Log("min");
             }
 
 

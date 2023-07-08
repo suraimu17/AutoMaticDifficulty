@@ -2512,8 +2512,8 @@ MonoBehaviour:
   - {fileID: 731520768}
   - {fileID: 40261970}
   enemy:
+  - {fileID: 6282550824704763387, guid: c069fd1bca728404abd507df9b66e178, type: 3}
   - {fileID: 5074999082415643480, guid: a26059958d531f144ab78ef2d0d72d50, type: 3}
-  - {fileID: 1178991348594108253, guid: f6f5c45acdfeae14d905d9bd6cff9217, type: 3}
 --- !u!4 &609471678
 Transform:
   m_ObjectHideFlags: 0
@@ -2653,7 +2653,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 339891792}
-  chara: {fileID: 7563073610021936016, guid: 862316e56f787b74da93c89b416c7c38, type: 3}
 --- !u!1 &975909326
 GameObject:
   m_ObjectHideFlags: 0

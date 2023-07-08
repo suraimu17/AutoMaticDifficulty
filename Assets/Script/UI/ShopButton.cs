@@ -3,17 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopButton : MonoBehaviour
-{
-    [SerializeField] private Image shopPanel;
-
-    public void OpenShopPanel() 
+namespace UI {
+    public class ShopButton : MonoBehaviour
     {
-        shopPanel.gameObject.SetActive(true);
-    }
-    public void CloseShopPanel()
-    {
-        shopPanel.gameObject.SetActive(false);
-    }
+        [SerializeField] private Image shopPanel;
+        public bool IsOpen { get; private set; } = false;
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space)) 
+            {
+                OpenShopPanel();
+            }
+        }
+        public void OpenShopPanel()
+        {
+            shopPanel.gameObject.SetActive(true);
+            IsOpen = true;
+        }
+        public void CloseShopPanel()
+        {
+            shopPanel.gameObject.SetActive(false);
+            IsOpen = false;
+        }
+
+    }
 }

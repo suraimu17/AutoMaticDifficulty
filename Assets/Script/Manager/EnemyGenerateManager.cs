@@ -13,20 +13,23 @@ namespace Manager
         [SerializeField] Transform[] generatePoint;
         [SerializeField] GameObject[] enemy;
 
-        private float generateSpan = 2.0f;
+        private float generateSpan = 3.0f;
         private void Start()
         {
+            for (int i = 0; i < enemy.Length; i++) 
+            {
+                enemy[i].GetComponent<TestEnemyController>().target = baseTransform;
+            }
+
             GenerateObservable();
         }
         private void RandomGenerateEnemy()
         {
-            var number = Random.Range(0, generatePoint.Length);
-
+            var spawnNum = Random.Range(0, generatePoint.Length);
             var enemyNum = Random.Range(0, enemy.Length);
+            //Debug.Log("enemynum"+enemyNum);
 
-            enemy[enemyNum].GetComponent<TestEnemyController>().target = baseTransform;
-            if (enemy[enemyNum].GetComponent<TestEnemyController>().target == null) Debug.Log("nullnull");
-            Instantiate(enemy[enemyNum], generatePoint[number].position, Quaternion.identity);
+            Instantiate(enemy[enemyNum], generatePoint[spawnNum].position, Quaternion.identity);
 
         }
         private void GenerateObservable()
