@@ -40,7 +40,6 @@ namespace UI
                 .Subscribe(_ =>
                 {
                     Vector3 mouse_position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
                     //タイルマップじゃなくてもキャラでも出来そう。
                     Vector3Int grid = tilemap.WorldToCell(mouse_position);
                 /*

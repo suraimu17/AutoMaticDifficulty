@@ -27,7 +27,6 @@ namespace Manager
         {
             var spawnNum = Random.Range(0, generatePoint.Length);
             var enemyNum = Random.Range(0, enemy.Length);
-            //Debug.Log("enemynum"+enemyNum);
 
             Instantiate(enemy[enemyNum], generatePoint[spawnNum].position, Quaternion.identity);
 

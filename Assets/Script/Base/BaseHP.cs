@@ -5,12 +5,19 @@ using UnityEngine;
 namespace Base {
     public class BaseHP : MonoBehaviour
     {
-        public int baseHp { private set; get; } = 10;
-
+        public int MaxBaseHp { private set; get; } = 10;
+        public int currentBaseHp { private set; get; }
+        private void Awake()
+        {
+            resetHp();
+        }
         public void DecreaseHp ()
         {
-            baseHp--;
-            //Debug.Log(baseHp);
+            currentBaseHp--;
+        }
+        public void resetHp()
+        {
+            currentBaseHp = MaxBaseHp;
         }
     }
 }
