@@ -2633,6 +2633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 609471678}
   - component: {fileID: 609471677}
+  - component: {fileID: 609471679}
   m_Layer: 0
   m_Name: EnemyGenerator
   m_TagString: Untagged
@@ -2660,6 +2661,7 @@ MonoBehaviour:
   enemy:
   - {fileID: 6282550824704763387, guid: c069fd1bca728404abd507df9b66e178, type: 3}
   - {fileID: 5074999082415643480, guid: a26059958d531f144ab78ef2d0d72d50, type: 3}
+  - {fileID: 1036214768486100845, guid: 1fb018edbeeb31443bd242c0f3093653, type: 3}
 --- !u!4 &609471678
 Transform:
   m_ObjectHideFlags: 0
@@ -2676,6 +2678,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &609471679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609471676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b074a4e612c6145a8994b030444b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &619297386
 GameObject:
   m_ObjectHideFlags: 0

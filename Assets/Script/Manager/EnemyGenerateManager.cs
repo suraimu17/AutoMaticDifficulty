@@ -4,6 +4,8 @@ using UnityEngine;
 using UniRx.Triggers;
 using UniRx;
 using Enemy.Test;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 
 namespace Manager
 {
@@ -13,15 +15,22 @@ namespace Manager
         [SerializeField] Transform[] generatePoint;
         [SerializeField] GameObject[] enemy;
 
-        private float generateSpan = 3.0f;
+        private EnemyPattern enemyPattern;
+
+        //public bool IsRun = false;
+
+        private float generateSpan = 5.0f;
         private void Start()
         {
             for (int i = 0; i < enemy.Length; i++) 
             {
                 enemy[i].GetComponent<TestEnemyController>().target = baseTransform;
             }
+            enemyPattern = GetComponent<EnemyPattern>();
+            CancellationToken token = this.GetCancellationTokenOnDestroy();
 
-            GenerateObservable();
+             GenerateObservable();
+            // GenerateAsync(token);
         }
         private void RandomGenerateEnemy()
         {
@@ -30,6 +39,10 @@ namespace Manager
 
             Instantiate(enemy[enemyNum], generatePoint[spawnNum].position, Quaternion.identity);
 
+        }
+        public void GenerateEnemy(int enemyNum,int spawnNum)
+        {
+            Instantiate(enemy[enemyNum], generatePoint[spawnNum].position, Quaternion.identity);
         }
         private void GenerateObservable()
         {
@@ -42,5 +55,16 @@ namespace Manager
                 .AddTo(this);
         }
 
+        private async UniTaskVoid GenerateAsync(CancellationToken token) 
+        {
+            while (true)
+            {
+                await UniTask.Delay(System.TimeSpan.FromSeconds(4.0f));
+                var spawnNum = Random.Range(0, generatePoint.Length);
+                enemyPattern.TankPattern(enemy[1], enemy[0], 3, generatePoint[spawnNum].position);
+                await UniTask.Delay(System.TimeSpan.FromSeconds(3.0f));
+            }
+
+        }
     }
 }

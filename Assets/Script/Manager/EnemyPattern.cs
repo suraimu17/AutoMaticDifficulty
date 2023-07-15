@@ -4,22 +4,28 @@ using UnityEngine;
 using UniRx;
 using Cysharp.Threading.Tasks;
 
-public class EnemyPattern : MonoBehaviour
+namespace Manager
 {
-
-
-
-
-
-    private bool TankPattern(GameObject TankEnemy,GameObject Enemy,int num) //async‚É‚·‚é
+    public class EnemyPattern : MonoBehaviour
     {
-        //Instantiate(TankEnemy, this.transform.position,  Quaternion.identity);
-
-        //await 
 
 
 
-        return true;
+
+        //delegate@g‚¦‚é‚©‚à
+        public async UniTaskVoid TankPattern(GameObject TankEnemy, GameObject Enemy, int num, Vector3 generatePos) //async‚É‚·‚é
+        {
+            
+            Instantiate(TankEnemy, generatePos, Quaternion.identity);
+
+
+            for (int i = 0; i < num - 1; i++)
+            {
+                await UniTask.Delay(System.TimeSpan.FromSeconds(1.5f));
+                Instantiate(Enemy, generatePos, Quaternion.identity);
+            }
+
+        }
+
     }
-
 }

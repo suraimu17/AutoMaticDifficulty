@@ -96,6 +96,26 @@ namespace UI
 
                })
                .AddTo(this);
+
+
+            //ƒLƒƒƒ‰‚ÉG‚ê‚½Žž
+            this.UpdateAsObservable()
+                .Where(_ => Input.GetMouseButtonDown(0))
+                .Where(_ => shopButton.IsOpen == false)
+                .Subscribe(_ =>
+                {
+                    Ray ray= Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                    RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, 10);
+                    if (hit.collider == null) return;
+
+                    if (hit.collider.tag == "Chara") 
+                    {
+                        Debug.Log("ƒLƒƒƒ‰”»’è‰Â");
+                    }
+
+                })
+                .AddTo(this);
         }
         private bool checkList(Vector3 position)
         {
