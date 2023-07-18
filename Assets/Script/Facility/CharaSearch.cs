@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FacilitySearch : MonoBehaviour
+public class CharaSearch : MonoBehaviour
 {
     private List<GameObject> enemyList = new List<GameObject>();
 

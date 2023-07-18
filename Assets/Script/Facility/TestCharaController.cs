@@ -4,10 +4,10 @@ using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
 
-public class TestFacilityController:MonoBehaviour,IFacilityController
+public class TestCharaController:MonoBehaviour,ICharaController
 {
-    private TestFacilityAttack testFacilityAttack;
-    private FacilitySearch facilitySearch;
+    private TestCharaAttack testCharaAttack;
+    private CharaSearch charaSearch;
 
     private GameObject targetEnemy;
 
@@ -15,14 +15,14 @@ public class TestFacilityController:MonoBehaviour,IFacilityController
 
     private void Start()
     {
-        testFacilityAttack = GetComponent<TestFacilityAttack>();
-        facilitySearch = GetComponent<FacilitySearch>();
+        testCharaAttack = GetComponent<TestCharaAttack>();
+        charaSearch = GetComponent<CharaSearch>();
 
         AttackObservable();
     }
     private void Update()
     {
-        targetEnemy = facilitySearch.FindNearerstEnemy();
+        targetEnemy = charaSearch.FindNearerstEnemy();
     }
     private void AttackObservable() 
     {
@@ -34,7 +34,7 @@ public class TestFacilityController:MonoBehaviour,IFacilityController
                 if (targetEnemy == null) return;
                 Debug.Log("ìGÇÕÇ¢ÇΩ");
 
-                testFacilityAttack.Attack(targetEnemy, attackPower);
+                testCharaAttack.Attack(targetEnemy, attackPower);
                 Debug.Log("çUåÇ");
             })
             .AddTo(this);

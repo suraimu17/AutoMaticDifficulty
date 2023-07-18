@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
 
-public class TestFacilityAttack : MonoBehaviour
+public class TestCharaAttack : MonoBehaviour
 {
     
     public void Attack(GameObject enemy,int attackPower) 

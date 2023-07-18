@@ -3687,7 +3687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharaArray:
-  - {fileID: 7563073610021936016, guid: 862316e56f787b74da93c89b416c7c38, type: 3}
+  - {fileID: 6314013918142501494, guid: 59c608cd366797e419a5bd3c991e1719, type: 3}
   - {fileID: 6462073399661703336, guid: dd59fa032c2cd074dbab00505fd7b6c9, type: 3}
 --- !u!4 &1609279190
 Transform:
