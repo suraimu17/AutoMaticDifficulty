@@ -4,6 +4,7 @@ using UniRx.Triggers;
 using UniRx;
 using UnityEngine.Tilemaps;
 using Manager;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -16,6 +17,7 @@ namespace UI
         private CoinManager coinManager => CoinManager.Instance;
         private CharaManager charaManager => CharaManager.Instance;
         private ShopButton shopButton;
+        private UpgradeUI upgradeUI;
         //キャラの場合
         private float AdjustX = 0.4f;
         private float AdjustY = 0.5f;
@@ -27,6 +29,7 @@ namespace UI
         private void Start()
         {
             shopButton = FindObjectOfType<ShopButton>();
+            upgradeUI = FindObjectOfType<UpgradeUI>();
             pastGrid = new Vector3Int(0, 0, 0);
             PointerObservable();
         }
@@ -61,9 +64,10 @@ namespace UI
                         gridChara = new Vector3(gridChara.x + AdjustX, gridChara.y + AdjustY, gridChara.z);
                         if (checkList(gridChara) == false) return;
                     //値段仮置き
-                    if (coinManager.BuyFacility(1) == false) return;
+                    if (coinManager.BuyChara(1) == false) return;
 
-                        Instantiate(CurrentPutChara, gridChara, Quaternion.identity);
+                       var obj= Instantiate(CurrentPutChara, gridChara, Quaternion.identity);
+                       obj.name = CurrentPutChara.name;
                     }
                 })
                 .AddTo(this);
@@ -111,7 +115,7 @@ namespace UI
 
                     if (hit.collider.tag == "Chara") 
                     {
-                        Debug.Log("キャラ判定可");
+                        upgradeUI.OpenCharaPanel(hit.collider.gameObject);
                     }
 
                 })

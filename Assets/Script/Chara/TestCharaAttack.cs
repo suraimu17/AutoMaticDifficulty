@@ -6,7 +6,7 @@ using Enemy;
 public class TestCharaAttack : MonoBehaviour
 {
     
-    public void Attack(GameObject enemy,int attackPower) 
+    public void Attack(GameObject enemy,float attackPower) 
     {
         var enemyHp = enemy.GetComponent<IEnemyHp>();
         enemyHp.DecreaseHp(attackPower);

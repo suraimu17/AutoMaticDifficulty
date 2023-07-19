@@ -6,8 +6,8 @@ namespace Enemy
 {
     public interface IEnemyHp
     {
-        int enemyHp { get; }
+        float enemyHp { get; }
         bool IsDead { get; }
-        void DecreaseHp(int facilityPower);
+        void DecreaseHp(float charaPower);
     }
 }

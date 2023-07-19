@@ -22,7 +22,7 @@ namespace Manager
             DontDestroyOnLoad(gameObject);
         }
 
-        public bool BuyFacility(int price)
+        public bool BuyChara(int price)
         {
             if (CurrentCoin - price < 0)
             {

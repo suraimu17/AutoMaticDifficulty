@@ -8,6 +8,7 @@ public class TestCharaController:MonoBehaviour,ICharaController
 {
     private TestCharaAttack testCharaAttack;
     private CharaSearch charaSearch;
+    private CharaStatus charaStatus;
 
     private GameObject targetEnemy;
 
@@ -17,6 +18,7 @@ public class TestCharaController:MonoBehaviour,ICharaController
     {
         testCharaAttack = GetComponent<TestCharaAttack>();
         charaSearch = GetComponent<CharaSearch>();
+        charaStatus = GetComponent<CharaStatus>();
 
         AttackObservable();
     }
@@ -34,7 +36,7 @@ public class TestCharaController:MonoBehaviour,ICharaController
                 if (targetEnemy == null) return;
                 Debug.Log("ìGÇÕÇ¢ÇΩ");
 
-                testCharaAttack.Attack(targetEnemy, attackPower);
+                testCharaAttack.Attack(targetEnemy, charaStatus.power);
                 Debug.Log("çUåÇ");
             })
             .AddTo(this);

@@ -10,7 +10,7 @@ namespace Enemy.Test
 {
     public class TestEnemyHp : MonoBehaviour, IEnemyHp
     {
-        public int enemyHp { private set; get; }
+        public float enemyHp { private set; get; }
         [SerializeField]private int baseHp;
         public bool IsDead => enemyHp <= 0;
         private int coinNum=> GetComponent<TestEnemyController>().coinNum;
@@ -22,9 +22,9 @@ namespace Enemy.Test
             DeathObservable();
             HpBarObservable();
         }
-        public void DecreaseHp(int facilityPower)
+        public void DecreaseHp(float charaPower)
         {
-            enemyHp -= facilityPower;
+            enemyHp -= charaPower;
             Debug.Log("É_ÉÅÅ[ÉW");
 
             if (enemyHp <= 0) coinManager.DropCoin(coinNum);
