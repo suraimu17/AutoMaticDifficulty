@@ -12,8 +12,6 @@ public class TestCharaController:MonoBehaviour,ICharaController
 
     private GameObject targetEnemy;
 
-    private int attackPower = 2;
-
     private void Start()
     {
         testCharaAttack = GetComponent<TestCharaAttack>();

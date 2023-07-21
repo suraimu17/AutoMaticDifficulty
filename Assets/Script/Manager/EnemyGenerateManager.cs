@@ -16,10 +16,13 @@ namespace Manager
         [SerializeField] GameObject[] enemy;
 
         private EnemyPattern enemyPattern;
-
-        //public bool IsRun = false;
+        public bool IsRun = false;
 
         private float generateSpan = 5.0f;
+        public int generateCount { get; private set; } = MaxGenerateNum;
+        public int enemyDeathCount { get; private set; } = MaxGenerateNum;
+        private const int MaxGenerateNum= 15;
+        private const int MaxWave2GenerateNum= 50;
         private void Start()
         {
             for (int i = 0; i < enemy.Length; i++) 
@@ -37,8 +40,15 @@ namespace Manager
             var spawnNum = Random.Range(0, generatePoint.Length);
             var enemyNum = Random.Range(0, enemy.Length);
 
-            Instantiate(enemy[enemyNum], generatePoint[spawnNum].position, Quaternion.identity);
-
+            var enemyIns=Instantiate(enemy[enemyNum], generatePoint[spawnNum].position, Quaternion.identity);
+            enemyIns.OnDestroyAsObservable()
+                .Subscribe(_ =>
+                {
+                    enemyDeathCount--;
+                    Debug.Log("death"+enemyDeathCount);
+                })
+                .AddTo(this);
+            generateCount--;
         }
         public void GenerateEnemy(int enemyNum,int spawnNum)
         {
@@ -48,6 +58,8 @@ namespace Manager
         {
             this.UpdateAsObservable()
                 .ThrottleFirst(System.TimeSpan.FromSeconds(generateSpan))
+                .Where(_=>generateCount>0)
+                .Where(_=>IsRun==true)
                 .Subscribe(_ =>
                 {
                     RandomGenerateEnemy();
@@ -65,6 +77,13 @@ namespace Manager
                 await UniTask.Delay(System.TimeSpan.FromSeconds(3.0f));
             }
 
+        }
+
+        public void ResetData() 
+        {
+            generateCount = MaxWave2GenerateNum;
+            enemyDeathCount = MaxWave2GenerateNum;
+        
         }
     }
 }

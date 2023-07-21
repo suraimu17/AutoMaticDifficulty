@@ -72,7 +72,7 @@ namespace UI
                 })
                 .AddTo(this);
 
-            //選択タイルを表示  TODO:タイルを戻す
+            //選択タイルを表示  
             this.UpdateAsObservable()
                .Where(_ => shopButton.IsOpen == false)
                .Subscribe(_ =>
@@ -81,9 +81,9 @@ namespace UI
                    Vector3Int grid = tilemap.WorldToCell(mouse_position);
                    if (tilemap.HasTile(pastGrid))
                    {
+                       //タイル戻し
                        if (grid != pastGrid)
                        {
-                           Debug.Log("戻し");
                            tilemap.SetTile(pastGrid, baseTile);
                        }
                    }
@@ -91,9 +91,9 @@ namespace UI
 
                    if (tilemap.HasTile(grid))
                    {
+                       //タイル設置
                        if (tilemap.GetTile(grid)!=tile)
                        {
-                           Debug.Log("設置");
                            tilemap.SetTile(grid, tile);
                        }
                    }

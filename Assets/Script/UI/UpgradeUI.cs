@@ -13,21 +13,43 @@ namespace UI
         [SerializeField] private Text nameText;
         [SerializeField] private Text upgradeText;
         [SerializeField] private Button upgradeButton;
+        [SerializeField] private Button cancelButton;
 
-        [SerializeField] private Sprite cSprite;
-
+        private void Update()
+        {
+            CancelButton();
+        }
         public void OpenCharaPanel(GameObject chara)
         {
+            upgradeButton.onClick.RemoveAllListeners();
 
             charaPanel.gameObject.SetActive(true);
+            var charaStatus = chara.gameObject.GetComponent<CharaStatus>();
+            UIUpdate(chara);
+            upgradeButton.onClick.AddListener(charaStatus.Upgrade);
+
+            //upgradeButton.onClick.AddListener(()=>UIUpdate(chara));
+
+
+
+        }
+        public void UIUpdate(GameObject chara)
+        {
             var charaStatus = chara.gameObject.GetComponent<CharaStatus>();
 
             charaImage.sprite = chara.gameObject.GetComponent<SpriteRenderer>().sprite;
             powerText.text = "攻撃力：" + charaStatus.power;
             nameText.text = "" + chara.name;
             upgradeText.text = "次のコスト" + charaStatus.cost;
-            upgradeButton.onClick.AddListener(charaStatus.Upgrade);
 
+        }
+        public void CancelButton() 
+        {
+            if (cancelButton.gameObject.activeSelf&&Input.GetKeyDown(KeyCode.Q)) 
+            {
+                charaPanel.gameObject.SetActive(false);
+            }
+        
         }
 
     }

@@ -1,17 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UniRx;
-using UniRx.Triggers;
+using System.Threading;
 
 namespace Manager
 {
     public class GameManager : MonoBehaviour
     {
         public int waveNum { get; private set; } = 1;
-        public int currentTime { get; private set; } = WaveTime;
-
-        private const int WaveTime= 60;
+        private EnemyGenerateManager enemyGenerateManager;
 
         public static GameManager Instance = null;
         private void Awake()
@@ -26,18 +24,21 @@ namespace Manager
         }
         private void Start()
         {
-            TimeObservable();
+            enemyGenerateManager = FindObjectOfType<EnemyGenerateManager>();
+            CancellationToken token = this.GetCancellationTokenOnDestroy();
+            StartWave(token);
         }
-        private void TimeObservable() 
+
+        private async UniTaskVoid StartWave(CancellationToken token) 
         {
-            this.UpdateAsObservable()
-                .ThrottleFirst(System.TimeSpan.FromSeconds(1))
-                //.Where(_=>)Waveˆ—’†‚Íœ‚­ˆ—‚ðŽÀ‘•‚·‚é
-                .Subscribe(_ =>
-                {
-                    currentTime--;
-                })
-                .AddTo(this);
-        }
+
+            await UniTask.Delay(System.TimeSpan.FromSeconds(5));
+            Debug.Log("start");
+            enemyGenerateManager.IsRun = true;
+            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount == 0);
+            Debug.Log("wave2");
+            await UniTask.Delay(System.TimeSpan.FromSeconds(5));
+            enemyGenerateManager.ResetData();
+        }  
     }
 }

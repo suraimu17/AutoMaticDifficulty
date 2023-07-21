@@ -11,9 +11,14 @@ namespace UI {
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space)) 
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 OpenShopPanel();
+            }
+            else if (Input.GetKeyDown(KeyCode.Q)&&shopPanel.gameObject.activeSelf)
+            {
+                Debug.Log("close");
+                CloseShopPanel();
             }
         }
         public void OpenShopPanel()
