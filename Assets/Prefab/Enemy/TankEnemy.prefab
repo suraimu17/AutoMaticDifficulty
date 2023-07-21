@@ -420,6 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  coinNum: 2
 --- !u!114 &5074999082415643493
 MonoBehaviour:
   m_ObjectHideFlags: 0

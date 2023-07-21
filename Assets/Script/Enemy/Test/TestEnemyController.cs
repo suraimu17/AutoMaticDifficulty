@@ -13,7 +13,7 @@ namespace Enemy.Test
 
         
         public Transform target;
-        public int coinNum = 1;
+        public int coinNum;
 
         private void Start()
         {

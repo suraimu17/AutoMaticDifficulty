@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  coinNum: 1
+  coinNum: 2
 --- !u!114 &6282550824704763390
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,6 +25,8 @@ namespace UI
 
             charaPanel.gameObject.SetActive(true);
             var charaStatus = chara.gameObject.GetComponent<CharaStatus>();
+            if (charaStatus.level == 2) upgradeButton.gameObject.SetActive(false);
+            else upgradeButton.gameObject.SetActive(true);
             UIUpdate(chara);
             upgradeButton.onClick.AddListener(charaStatus.Upgrade);
 
