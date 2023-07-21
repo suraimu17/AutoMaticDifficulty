@@ -32,10 +32,10 @@ public class TestCharaController:MonoBehaviour,ICharaController
             {
                 //targetEnemy = facilitySearch.FindNearerstEnemy();
                 if (targetEnemy == null) return;
-                Debug.Log("“G‚Í‚¢‚½");
+                //Debug.Log("“G‚Í‚¢‚½");
 
                 testCharaAttack.Attack(targetEnemy, charaStatus.power);
-                Debug.Log("UŒ‚");
+                //Debug.Log("UŒ‚");
             })
             .AddTo(this);
     }

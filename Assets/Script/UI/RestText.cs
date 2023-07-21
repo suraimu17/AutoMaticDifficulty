@@ -21,7 +21,7 @@ namespace UI
             this.ObserveEveryValueChanged(x => enemyGenerateManager.generateCount)
                 .Subscribe(_=>
                 {
-                    restText.text = "c‚è“G”F" + enemyGenerateManager.generateCount;
+                    restText.text = "c‚è“G”" + enemyGenerateManager.generateCount;
                 })
                 .AddTo(this);
 

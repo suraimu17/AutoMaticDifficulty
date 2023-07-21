@@ -43,14 +43,16 @@ namespace UI
             upgradeText.text = "ŽŸ‚ÌƒRƒXƒg" + charaStatus.cost;
 
         }
-        public void CancelButton() 
+        public void CancelButton()
         {
-            if (cancelButton.gameObject.activeSelf&&Input.GetKeyDown(KeyCode.Q)) 
+            if (cancelButton.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Q))
             {
                 charaPanel.gameObject.SetActive(false);
             }
-        
         }
-
+        public void Cancel() 
+        {
+            charaPanel.gameObject.SetActive(false);
+        }
     }
 }

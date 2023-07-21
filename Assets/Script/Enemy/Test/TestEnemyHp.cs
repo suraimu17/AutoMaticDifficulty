@@ -25,7 +25,7 @@ namespace Enemy.Test
         public void DecreaseHp(float charaPower)
         {
             enemyHp -= charaPower;
-            Debug.Log("ダメージ");
+            //Debug.Log("ダメージ");
 
             if (enemyHp <= 0) coinManager.DropCoin(coinNum);
         }

@@ -14,6 +14,8 @@ namespace UI
         [SerializeField] private TileBase baseTile;
         [SerializeField] private Tilemap tilemap;
 
+        [SerializeField]private GameObject charaPanel;
+
         private CoinManager coinManager => CoinManager.Instance;
         private CharaManager charaManager => CharaManager.Instance;
         private ShopButton shopButton;
@@ -22,6 +24,7 @@ namespace UI
         private float AdjustX = 0.4f;
         private float AdjustY = 0.5f;
         private GameObject CurrentPutChara;
+
 
         private List<Vector3> tileList = new List<Vector3>();
         private Vector3Int pastGrid;
@@ -40,6 +43,7 @@ namespace UI
             this.UpdateAsObservable()
                 .Where(_ => Input.GetMouseButtonDown(0))
                 .Where(_ => shopButton.IsOpen == false)
+                .Where(_=>!charaPanel.activeSelf)
                 .Subscribe(_ =>
                 {
                     Vector3 mouse_position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -111,13 +115,24 @@ namespace UI
                     Ray ray= Camera.main.ScreenPointToRay(Input.mousePosition);
 
                     RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, 10);
-                    if (hit.collider == null) return;
+                    
+                    if (hit.collider == null/*||hit.collider.isTrigger==false*/) return;
 
-                    if (hit.collider.tag == "Chara") 
+                    if (hit.collider.tag == "Chara")
                     {
+                        Debug.Log("Žæ“¾");
                         upgradeUI.OpenCharaPanel(hit.collider.gameObject);
                     }
+                  /*  foreach (RaycastHit2D hitAll in Physics2D.RaycastAll((Vector2)ray.origin, (Vector2)ray.direction, 10)) {
+                        Debug.Log("“–‚½‚Á‚½‚â‚Â"+hitAll.collider.gameObject);
+                        if (hitAll.collider == null || hitAll.collider.isTrigger == true) return;
 
+                        if (hitAll.collider.tag == "Chara")
+                        {
+                            Debug.Log("Žæ“¾");
+                            upgradeUI.OpenCharaPanel(hitAll.collider.gameObject.transform.parent.gameObject);
+                        }
+                    }*/
                 })
                 .AddTo(this);
         }

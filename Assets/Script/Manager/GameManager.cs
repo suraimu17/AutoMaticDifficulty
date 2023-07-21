@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Threading;
 
 namespace Manager
@@ -36,9 +37,16 @@ namespace Manager
             Debug.Log("start");
             enemyGenerateManager.IsRun = true;
             await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount == 0);
+            waveNum++;
+            //“ïˆÕ“x’²®”½‰f
             Debug.Log("wave2");
             await UniTask.Delay(System.TimeSpan.FromSeconds(5));
             enemyGenerateManager.ResetData();
+
+            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount == 0);
+            await UniTask.Delay(System.TimeSpan.FromSeconds(2));
+
+            SceneManager.LoadScene("EndScene");
         }  
     }
 }

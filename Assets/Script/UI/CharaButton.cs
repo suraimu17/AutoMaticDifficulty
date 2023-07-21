@@ -11,13 +11,11 @@ public class CharaButton : MonoBehaviour
     {
         charaManager.ResetCharaChoice();
         charaManager.CharaChoise[0] = true;
-        Debug.Log("0" + charaManager.CharaChoise[0]);
     }
     public void ChoiceChara2()
     {
         charaManager.ResetCharaChoice();
         charaManager.CharaChoise[1] = true;
-        Debug.Log("0" + charaManager.CharaChoise[1]);
     }
    /* public void ChoiceChara3()
     {

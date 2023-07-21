@@ -33,7 +33,7 @@ public class CharaSearch : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") && !enemyList.Contains(collision.gameObject))
         {
-
+            Debug.Log("“G”­Œ©");
             enemyList.Add(collision.gameObject);
             //‰¼’u‚«
             targetEnemy = collision.gameObject;
