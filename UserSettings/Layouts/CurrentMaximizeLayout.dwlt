@@ -224,8 +224,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 2a970000
-      m_LastClickedID: 38698
+      m_SelectedIDs: d09ffeff
+      m_LastClickedID: -90160
       m_ExpandedIDs: 70afffff8cb1ffffc4b1fffffcb1ffffe0b4ffff0cb6ffffc8eeffffc6f8ffffa2f9ffff2afbffffda640000909600009a960000b496000054970000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Scene
-    m_Image: {fileID: 2593428753322112591, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: 8634526014445323508, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
