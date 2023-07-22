@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 5074999082415643483}
   - component: {fileID: 6211196867022470151}
   m_Layer: 0
-  m_Name: TankEnemy
+  m_Name: ReTankEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -384,7 +384,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.9811321, g: 0.4017088, b: 0.4017088, a: 1}
+  m_Color: {r: 0.40000007, g: 0.7116108, b: 0.98039216, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsBoss: 0
   target: {fileID: 0}
-  coinNum: 2
+  coinNum: 1
 --- !u!114 &5074999082415643493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b178524a771f0498ac856957f1919f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHp: 35
+  baseHp: 50
 --- !u!50 &5074999082415643483
 Rigidbody2D:
   serializedVersion: 4

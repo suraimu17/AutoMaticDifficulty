@@ -9,7 +9,7 @@ namespace Manager
     {
         public static CoinManager Instance = null;
         public int CurrentCoin { get; private set; }
-        private int baseCoin = 5;
+        private int baseCoin = 10;
         private void Awake()
         {
             if (Instance == null)

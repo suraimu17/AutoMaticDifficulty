@@ -12,6 +12,7 @@ namespace Manager
 
         public static CharaManager Instance = null;
 
+        public int setCharaNum;
         private void Awake()
         {
             if (Instance == null)

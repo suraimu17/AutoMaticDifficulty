@@ -272,7 +272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 40261970}
   m_Layer: 0
-  m_Name: GeneratorPoint (2)
+  m_Name: GeneratorPointS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3084,14 +3084,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseTransform: {fileID: 1921530471}
   generatePoint:
-  - {fileID: 2013111112}
   - {fileID: 731520768}
   - {fileID: 40261970}
+  - {fileID: 2013111112}
   enemy:
   - {fileID: 6282550824704763387, guid: c069fd1bca728404abd507df9b66e178, type: 3}
   - {fileID: 5074999082415643480, guid: a26059958d531f144ab78ef2d0d72d50, type: 3}
   - {fileID: 1036214768486100845, guid: 1fb018edbeeb31443bd242c0f3093653, type: 3}
+  - {fileID: 6282550824704763387, guid: 4d91609dab3d08a448de3e9f768e596b, type: 3}
+  - {fileID: 5074999082415643480, guid: b586a9c672794654b84a69202eb3d8b5, type: 3}
+  - {fileID: 6282550824704763387, guid: 4d91609dab3d08a448de3e9f768e596b, type: 3}
+  - {fileID: 5074999082415643480, guid: b586a9c672794654b84a69202eb3d8b5, type: 3}
+  - {fileID: 6282550824704763387, guid: 4d91609dab3d08a448de3e9f768e596b, type: 3}
+  - {fileID: 5074999082415643480, guid: b586a9c672794654b84a69202eb3d8b5, type: 3}
+  - {fileID: 6282550824704763387, guid: 26900972830771148b433b1e141f5971, type: 3}
   IsRun: 0
+  IsPattern: 0
+  maxCoin: 0
+  releasePos: 1
+  releaseEnemy: 1
 --- !u!4 &609471678
 Transform:
   m_ObjectHideFlags: 0
@@ -3106,7 +3117,7 @@ Transform:
   m_Children:
   - {fileID: 2013111112}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &609471679
 MonoBehaviour:
@@ -3176,7 +3187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 731520768}
   m_Layer: 0
-  m_Name: GeneratorPoint (1)
+  m_Name: GeneratorPointF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3792,7 +3803,7 @@ RectTransform:
   - {fileID: 581140411}
   - {fileID: 23034280}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4549,6 +4560,107 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1354950745}
   m_CullTransparentMesh: 1
+--- !u!1 &1422133606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1422133608}
+  - component: {fileID: 1422133607}
+  m_Layer: 0
+  m_Name: DifficultyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1422133607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422133606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1310559f206320b4b8a07f1dc4a958f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationCoinCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationHpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7
+      value: 0.5
+      inSlope: 1.608499
+      outSlope: 1.608499
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.0979381
+      outWeight: 0.3685567
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1422133608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422133606}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.4449058, y: -0.22401789, z: -0.021298304}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1571221743
 GameObject:
   m_ObjectHideFlags: 0
@@ -4657,6 +4769,7 @@ MonoBehaviour:
   CharaArray:
   - {fileID: 6314013918142501494, guid: 59c608cd366797e419a5bd3c991e1719, type: 3}
   - {fileID: 6462073399661703336, guid: dd59fa032c2cd074dbab00505fd7b6c9, type: 3}
+  setCharaNum: 0
 --- !u!4 &1609279190
 Transform:
   m_ObjectHideFlags: 0
@@ -7989,7 +8102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2013111112}
   m_Layer: 0
-  m_Name: GeneratorPoint
+  m_Name: GeneratorPointT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8054,7 +8167,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2135852995
 GameObject:

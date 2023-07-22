@@ -15,6 +15,10 @@ namespace Base {
         {
             currentBaseHp--;
         }
+        public void DecreaseBossHp()
+        {
+            currentBaseHp=0;
+        }
         public void resetHp()
         {
             currentBaseHp = MaxBaseHp;

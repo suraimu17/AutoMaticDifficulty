@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b18a86b3e14c840a9d87302bbf71ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsBoss: 0
   target: {fileID: 0}
   coinNum: 2
 --- !u!114 &6282550824704763390
@@ -255,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b178524a771f0498ac856957f1919f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHp: 10
+  baseHp: 20
 --- !u!114 &6282550824704763391
 MonoBehaviour:
   m_ObjectHideFlags: 0

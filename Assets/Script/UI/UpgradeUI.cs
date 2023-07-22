@@ -42,7 +42,7 @@ namespace UI
             charaImage.sprite = chara.gameObject.GetComponent<SpriteRenderer>().sprite;
             powerText.text = "攻撃力：" + charaStatus.power;
             nameText.text = "" + chara.name;
-            upgradeText.text = "次のコスト" + charaStatus.cost;
+            upgradeText.text = "次のコスト" + charaStatus.upgradeCost;
 
         }
         public void CancelButton()

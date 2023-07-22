@@ -67,11 +67,13 @@ namespace UI
 
                         gridChara = new Vector3(gridChara.x + AdjustX, gridChara.y + AdjustY, gridChara.z);
                         if (checkList(gridChara) == false) return;
-                    //値段仮置き
-                    if (coinManager.BuyChara(1) == false) return;
+                        //値段仮置き
+                        var price = CurrentPutChara.GetComponent<CharaStatus>().buyCost;
+                    if (coinManager.BuyChara(price) == false) return;
 
                        var obj= Instantiate(CurrentPutChara, gridChara, Quaternion.identity);
                        obj.name = CurrentPutChara.name;
+                       charaManager.setCharaNum++;
                     }
                 })
                 .AddTo(this);

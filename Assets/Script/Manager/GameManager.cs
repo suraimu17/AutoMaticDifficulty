@@ -11,6 +11,7 @@ namespace Manager
     {
         public int waveNum { get; private set; } = 1;
         private EnemyGenerateManager enemyGenerateManager;
+        private DifficultyManager difficultyManager;
 
         public static GameManager Instance = null;
         private void Awake()
@@ -26,6 +27,7 @@ namespace Manager
         private void Start()
         {
             enemyGenerateManager = FindObjectOfType<EnemyGenerateManager>();
+            difficultyManager = FindObjectOfType<DifficultyManager>();
             CancellationToken token = this.GetCancellationTokenOnDestroy();
             StartWave(token);
         }
@@ -36,14 +38,24 @@ namespace Manager
             await UniTask.Delay(System.TimeSpan.FromSeconds(5));
             Debug.Log("start");
             enemyGenerateManager.IsRun = true;
-            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount == 0);
+
+            await UniTask.WaitUntil(() => enemyGenerateManager.generateCount ==15, cancellationToken: token);
+            enemyGenerateManager.releasePos++;
+            enemyGenerateManager.releaseEnemy++;
+            await UniTask.WaitUntil(() => enemyGenerateManager.generateCount == 8, cancellationToken: token);
+            enemyGenerateManager.releasePos++;
+            enemyGenerateManager.releaseEnemy++;
+
+            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount == 0,cancellationToken:token);
             waveNum++;
             //“ïˆÕ“x’²®”½‰f
+            difficultyManager.reflectDifficulty();
             Debug.Log("wave2");
             await UniTask.Delay(System.TimeSpan.FromSeconds(5));
             enemyGenerateManager.ResetData();
+ 
 
-            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount == 0);
+            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount == 0, cancellationToken: token);
             await UniTask.Delay(System.TimeSpan.FromSeconds(2));
 
             SceneManager.LoadScene("EndScene");

@@ -177,7 +177,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <power>k__BackingField: 2
-  <cost>k__BackingField: 5
+  <upgradeCost>k__BackingField: 5
+  <buyCost>k__BackingField: 3
+  upgradeObj: {fileID: 3185310100085111387, guid: 3d1918ec128af0a478455cd912767677, type: 3}
 --- !u!61 &8601200789732722964
 BoxCollider2D:
   m_ObjectHideFlags: 0
