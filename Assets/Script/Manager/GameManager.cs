@@ -10,6 +10,7 @@ namespace Manager
     public class GameManager : MonoBehaviour
     {
         public int waveNum { get; private set; } = 1;
+        private const int MaxWaveNum = 2;
         private EnemyGenerateManager enemyGenerateManager;
         private DifficultyManager difficultyManager;
 

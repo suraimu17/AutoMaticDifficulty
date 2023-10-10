@@ -47,7 +47,7 @@ namespace UI
         }
         public void CancelButton()
         {
-            if (cancelButton.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Q))
+            if (cancelButton.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Space))
             {
                 charaPanel.gameObject.SetActive(false);
             }
