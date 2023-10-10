@@ -16,6 +16,7 @@ namespace Manager
         [SerializeField] GameObject[] enemy;
 
         private DifficultyManager difficultyManager;
+        private CoinManager coinManager => CoinManager.Instance;
         //private EnemyPattern enemyPattern;
         public bool IsRun = false;
         public bool IsPattern = false;
@@ -25,8 +26,6 @@ namespace Manager
         public int enemyDeathCount { get; private set; } = MaxGenerateNum;
         private const int MaxGenerateNum= 20;
         private const int MaxWave2GenerateNum= 50;
-
-        public int maxCoin = 0;
 
         public int releasePos=1;
         public int releaseEnemy=1;
@@ -50,8 +49,9 @@ namespace Manager
 
             var enemyIns=Instantiate(enemy[enemyNum], generatePoint[spawnNum].position, Quaternion.identity);
 
-            maxCoin += enemyIns.GetComponent<TestEnemyController>().coinNum;
-            Debug.Log("maxCoin"+maxCoin);
+            coinManager.canGetCoin += enemyIns.GetComponent<TestEnemyController>().coinNum;
+            Debug.Log("maxCoin"+coinManager.canGetCoin);
+
             enemyIns.OnDestroyAsObservable()
                 .Subscribe(_ =>
                 {

@@ -9,7 +9,9 @@ namespace Manager
 
     public class DifficultyManager : MonoBehaviour
     {
-        public float difficulty { get; private set; }=0.5f;
+
+        private const float baseDifficulty = 0.5f;
+        public float difficulty { get; private set; }=baseDifficulty;
         [SerializeField] AnimationCurve animationCoinCurve;
         [SerializeField] AnimationCurve animationHpCurve;
 
@@ -38,7 +40,7 @@ namespace Manager
            // var charaNum = charaManager.setCharaNum;
             var coin = coinManager.CurrentCoin;
 
-            var coinPer = (float)coin / (float)(enemyGenerateManager.maxCoin+10);
+            var coinPer = (float)coin / (float)(coinManager.canGetCoin+coinManager.baseCoin);
             var hpPer = ((float)baseHp.currentBaseHp / (float)baseHp.MaxBaseHp); ;
             Debug.Log("coinPer"+coinPer);
             Debug.Log("hpPer"+hpPer);

@@ -9,7 +9,9 @@ namespace Manager
     {
         public static CoinManager Instance = null;
         public int CurrentCoin { get; private set; }
-        private int baseCoin = 10;
+        public int baseCoin { get; private set; } = 10;
+        //ウェーブで手に入れられるコイン
+        public int canGetCoin = 0;
         private void Awake()
         {
             if (Instance == null)
@@ -39,6 +41,11 @@ namespace Manager
         {
             CurrentCoin += DropNum;
             Debug.Log("coin"+CurrentCoin);
+        }
+
+        public int CalCoinPer() 
+        {
+            return CurrentCoin / (baseCoin + canGetCoin);
         }
     }
 }
