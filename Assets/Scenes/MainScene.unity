@@ -3100,7 +3100,6 @@ MonoBehaviour:
   - {fileID: 6282550824704763387, guid: 26900972830771148b433b1e141f5971, type: 3}
   IsRun: 0
   IsPattern: 0
-  maxCoin: 0
   releasePos: 1
   releaseEnemy: 1
 --- !u!4 &609471678
@@ -3959,6 +3958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopPanel: {fileID: 288814169}
+  charaPanel: {fileID: 1236011939}
 --- !u!1 &1209422236
 GameObject:
   m_ObjectHideFlags: 0
@@ -4814,6 +4814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e966f0b70f3d30746b2ab627b224982f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canGetCoin: 0
 --- !u!4 &1637265912
 Transform:
   m_ObjectHideFlags: 0

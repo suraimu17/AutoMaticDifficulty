@@ -7,19 +7,21 @@ namespace UI {
     public class ShopButton : MonoBehaviour
     {
         [SerializeField] private Image shopPanel;
+        [SerializeField] private Image charaPanel;
         public bool IsOpen { get; private set; } = false;
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space)&&!shopPanel.gameObject.activeSelf)
-            {
-                OpenShopPanel();
-            }
-            else if (Input.GetKeyDown(KeyCode.Space)&&shopPanel.gameObject.activeSelf)
-            {
-                Debug.Log("close");
-                CloseShopPanel();
-            }
+
+                if (Input.GetKeyDown(KeyCode.Space) && !shopPanel.gameObject.activeSelf&&!charaPanel.gameObject.activeSelf)
+                {
+                    OpenShopPanel();
+                }
+                else if (Input.GetKeyDown(KeyCode.Space) && shopPanel.gameObject.activeSelf)
+                {
+                    CloseShopPanel();
+                }
+
         }
         public void OpenShopPanel()
         {
