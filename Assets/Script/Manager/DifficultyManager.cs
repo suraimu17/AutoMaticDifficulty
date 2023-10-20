@@ -38,9 +38,8 @@ namespace Manager
         public void adjustDifficulty() 
         {
            // var charaNum = charaManager.setCharaNum;
-            var coin = coinManager.CurrentCoin;
 
-            var coinPer = (float)coin / (float)(coinManager.canGetCoin+coinManager.baseCoin);
+            var coinPer = coinManager.CalCoinPer();
             var hpPer = ((float)baseHp.currentBaseHp / (float)baseHp.MaxBaseHp); ;
             Debug.Log("coinPer"+coinPer);
             Debug.Log("hpPer"+hpPer);

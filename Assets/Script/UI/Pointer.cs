@@ -20,6 +20,7 @@ namespace UI
         private CharaManager charaManager => CharaManager.Instance;
         private ShopButton shopButton;
         private UpgradeUI upgradeUI;
+        private TileMapCheck tileMapCheck;
         //ƒLƒƒƒ‰‚Ìê‡
         private float AdjustX = 0.4f;
         private float AdjustY = 0.5f;
@@ -33,6 +34,8 @@ namespace UI
         {
             shopButton = FindObjectOfType<ShopButton>();
             upgradeUI = FindObjectOfType<UpgradeUI>();
+            tileMapCheck = GetComponent<TileMapCheck>();
+
             pastGrid = new Vector3Int(0, 0, 0);
             PointerObservable();
         }
@@ -73,7 +76,10 @@ namespace UI
 
                        var obj= Instantiate(CurrentPutChara, gridChara, Quaternion.identity);
                        obj.name = CurrentPutChara.name;
+
+                       charaManager.strongTileChara = tileMapCheck.GetStrongTile(charaManager.strongTileChara,grid,tilemap);
                        charaManager.setCharaNum++;
+                        Debug.Log("‚¢‚¢Š‚ÌƒLƒƒƒ‰"+charaManager.strongTileChara);
                     }
                 })
                 .AddTo(this);

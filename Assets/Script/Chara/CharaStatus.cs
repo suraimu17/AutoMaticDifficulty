@@ -12,13 +12,10 @@ public class CharaStatus : MonoBehaviour,ICharaStatus
     [field:SerializeField] public int buyCost { get; private set; }
 
     [SerializeField] private GameObject upgradeObj;
-   // [SerializeField]private int nextCost;
+   //[SerializeField]private int nextCost;
      public int level { get; private set; } = 1;
 
-
-
-
-
+    private CharaManager charaManager => CharaManager.Instance;
 
     public void Upgrade() 
     {
@@ -27,6 +24,7 @@ public class CharaStatus : MonoBehaviour,ICharaStatus
             power *= 1.5f;
             level++;
             this.gameObject.GetComponent<SpriteRenderer>().sprite = upgradeObj.GetComponent<SpriteRenderer>().sprite;
+            charaManager.upgradeNum++;
         }
     }
 

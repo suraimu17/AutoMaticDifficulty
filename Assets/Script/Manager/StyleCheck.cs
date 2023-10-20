@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Manager;
@@ -51,12 +50,24 @@ public class StyleCheck : MonoBehaviour
             amountStylePer = (charaNum / 10)/2;
             if (amountStylePer >= 1) amountStylePer = 1.0f;
         }
-
+        Debug.Log("量スタイル" + amountStylePer);
     }
     //いい所においているかや強くしているか
     private void CheckStrong() 
     {
-         //upgrade回数
+        var upgradeNum = charaManager.upgradeNum;
+        //強さ
+        if (upgradeNum < 5)
+        {
+            strongStylePer += (upgradeNum / 5) / 4;
+        }
+        else
+        {
+            strongStylePer += (upgradeNum / 5) / 4;
+            if (amountStylePer >= 1) amountStylePer = 0.5f;
+        }
+        //いい所
+
     }   
     //コインをためているか
     private void CheckSave() 
@@ -72,7 +83,7 @@ public class StyleCheck : MonoBehaviour
             saveStylePer = coinPer / 0.8f;
             if (saveStylePer >= 1) saveStylePer = 1.0f;
         }
-
+        Debug.Log("様子見スタイル" + saveStylePer);
     }
     private void ResetStyle()
     {
