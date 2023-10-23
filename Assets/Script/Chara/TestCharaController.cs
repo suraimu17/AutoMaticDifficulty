@@ -6,7 +6,7 @@ using UniRx.Triggers;
 
 public class TestCharaController:MonoBehaviour,ICharaController
 {
-    private TestCharaAttack testCharaAttack;
+    private ICharaAttack charaAttack;
     private CharaSearch charaSearch;
     private CharaStatus charaStatus;
 
@@ -14,7 +14,7 @@ public class TestCharaController:MonoBehaviour,ICharaController
 
     private void Start()
     {
-        testCharaAttack = GetComponent<TestCharaAttack>();
+        charaAttack = GetComponent<ICharaAttack>();
         charaSearch = GetComponent<CharaSearch>();
         charaStatus = GetComponent<CharaStatus>();
 
@@ -34,7 +34,7 @@ public class TestCharaController:MonoBehaviour,ICharaController
                 if (targetEnemy == null) return;
                 //Debug.Log("ìGÇÕÇ¢ÇΩ");
 
-                testCharaAttack.Attack(targetEnemy, charaStatus.power);
+                charaAttack.Attack(targetEnemy, charaStatus.power);
                 //Debug.Log("çUåÇ");
             })
             .AddTo(this);
