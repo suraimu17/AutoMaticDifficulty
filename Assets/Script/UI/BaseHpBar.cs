@@ -22,7 +22,7 @@ namespace UI
         {
             var maxBaseHp=baseHP.MaxBaseHp;
 
-            Debug.Log("base"+baseHP.currentBaseHp+"max"+maxBaseHp);
+            //Debug.Log("base"+baseHP.currentBaseHp+"max"+maxBaseHp);
             this.ObserveEveryValueChanged(_ => baseHP.currentBaseHp)
                // .Where(_ => enemyHp != baseHp)//Å‰‚É”½‰ž‚µ‚È‚¢‚æ‚¤‚É
                 .Subscribe(_ =>

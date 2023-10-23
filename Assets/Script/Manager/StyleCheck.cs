@@ -7,16 +7,25 @@ public class StyleCheck : MonoBehaviour
     private CharaManager charaManager => CharaManager.Instance;
     private CoinManager coinManager => CoinManager.Instance;
 
-    public float amountStylePer { private set; get; }
-    public float strongStylePer { private set; get; }
-    public float saveStylePer { private set; get; }
+    public float amountStylePer { private set; get; } = 0;
+    public float strongStylePer { private set; get; } = 0;
+    public float saveStylePer { private set; get; } = 0;
 
     //１つのパターンに決めるときだけ使う
     public bool amountStyle { private set; get; } = false;
     public bool strongStyle { private set; get; } = false;
     public bool saveStyle { private set; get; } = false;
 
-    private void CheckStyle()
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            CheckAmount();
+            CheckStrong();
+            CheckSave();
+        }
+    }
+    public void CheckStyle()
     {
         ResetStyle();
 
@@ -24,6 +33,10 @@ public class StyleCheck : MonoBehaviour
         CheckStrong();
         CheckSave();
 
+        CalStylePer();
+        Debug.Log("量スタイル割合:" + amountStylePer);
+        Debug.Log("要所スタイル割合:" + strongStylePer);
+        Debug.Log("様子見スタイル割合:" + saveStylePer);
         /*
         //１つのパターンに決めるときだけ使う
         if (amountStylePer > saveStylePer)
@@ -39,7 +52,7 @@ public class StyleCheck : MonoBehaviour
     //どれだけキャラを置いているか
     private void CheckAmount() 
     {
-        var charaNum = charaManager.setCharaNum;
+        float charaNum = charaManager.setCharaNum;
 
         if (charaNum <10)
         {
@@ -55,26 +68,38 @@ public class StyleCheck : MonoBehaviour
     //いい所においているかや強くしているか
     private void CheckStrong() 
     {
-        var upgradeNum = charaManager.upgradeNum;
+        float upgradeNum = charaManager.upgradeNum;
         //強さ
-        if (upgradeNum < 5)
+        if (upgradeNum < 4)
         {
-            strongStylePer += (upgradeNum / 5) / 4;
+            strongStylePer += (upgradeNum / 4) / 4;
         }
         else
         {
-            strongStylePer += (upgradeNum / 5) / 4;
-            if (amountStylePer >= 1) amountStylePer = 0.5f;
+            strongStylePer += (upgradeNum / 4) / 4;
+            if (strongStylePer >= 1) strongStylePer = 0.5f;
         }
         //いい所
+        float strongCharaNum = charaManager.strongTileChara;
 
+        if (strongCharaNum < 5)
+        {
+            strongStylePer += (strongCharaNum / 5) / 4;
+        }
+        else 
+        {
+            strongStylePer += (upgradeNum / 5) / 4;
+            if (strongStylePer >= 1) strongStylePer = 0.5f;
+        }
+        Debug.Log("要所スタイル" + strongStylePer);
     }   
     //コインをためているか
     private void CheckSave() 
     {
         
-        var coinPer = coinManager.CalCoinPer();
-        if (coinPer < 0.5f)
+        float coinPer = coinManager.CalCoinPer();
+        Debug.Log("コイン割合"+coinPer);
+        if (coinPer < 0.45f)
         {
             saveStylePer = coinPer / 0.8f;
         }
@@ -90,5 +115,15 @@ public class StyleCheck : MonoBehaviour
         amountStyle = false;
         strongStyle = false;
         saveStyle = false;
+    }
+
+    private void CalStylePer() 
+    {
+        if (amountStylePer < 0.4f && strongStylePer < 0.4f && saveStylePer < 0.4f) Debug.Log("どれも当てはまらない");
+
+        var sumPer = amountStylePer + strongStylePer + saveStylePer;
+        amountStylePer = amountStylePer / sumPer;
+        strongStylePer = strongStylePer / sumPer;
+        saveStylePer = saveStylePer / sumPer;
     }
 }

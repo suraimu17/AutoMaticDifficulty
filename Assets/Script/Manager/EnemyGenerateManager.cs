@@ -50,7 +50,7 @@ namespace Manager
             var enemyIns=Instantiate(enemy[enemyNum], generatePoint[spawnNum].position, Quaternion.identity);
 
             coinManager.canGetCoin += enemyIns.GetComponent<TestEnemyController>().coinNum;
-            Debug.Log("maxCoin"+coinManager.canGetCoin);
+            //Debug.Log("maxCoin"+coinManager.canGetCoin);
 
             enemyIns.OnDestroyAsObservable()
                 .Subscribe(_ =>

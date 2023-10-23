@@ -13,6 +13,7 @@ namespace Manager
         private const int MaxWaveNum = 2;
         private EnemyGenerateManager enemyGenerateManager;
         private DifficultyManager difficultyManager;
+        private StyleCheck styleCheck;
 
         public static GameManager Instance = null;
         private void Awake()
@@ -29,6 +30,8 @@ namespace Manager
         {
             enemyGenerateManager = FindObjectOfType<EnemyGenerateManager>();
             difficultyManager = FindObjectOfType<DifficultyManager>();
+            styleCheck = GetComponent<StyleCheck>();
+
             CancellationToken token = this.GetCancellationTokenOnDestroy();
             StartWave(token);
         }
@@ -51,6 +54,8 @@ namespace Manager
             waveNum++;
             //ìÔà’ìxí≤êÆîΩâf
             difficultyManager.reflectDifficulty();
+            styleCheck.CheckStyle();
+
             Debug.Log("wave2");
             await UniTask.Delay(System.TimeSpan.FromSeconds(5));
             enemyGenerateManager.ResetData();

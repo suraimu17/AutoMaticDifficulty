@@ -40,12 +40,11 @@ namespace Manager
         public void DropCoin(int DropNum)
         {
             CurrentCoin += DropNum;
-            Debug.Log("coin"+CurrentCoin);
         }
 
-        public int CalCoinPer() 
+        public float CalCoinPer() 
         {
-            return CurrentCoin / (baseCoin + canGetCoin);
+            return (float)CurrentCoin / (baseCoin + canGetCoin);
         }
     }
 }
