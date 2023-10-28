@@ -99,13 +99,13 @@ public class StyleCheck : MonoBehaviour
         
         float coinPer = coinManager.CalCoinPer();
         Debug.Log("コイン割合"+coinPer);
-        if (coinPer < 0.45f)
+        if (coinPer < 0.40f)
         {
-            saveStylePer = coinPer / 0.8f;
+            saveStylePer = coinPer / 0.7f;
         }
         else
         {
-            saveStylePer = coinPer / 0.8f;
+            saveStylePer = coinPer / 0.7f;
             if (saveStylePer >= 1) saveStylePer = 1.0f;
         }
         Debug.Log("様子見スタイル" + saveStylePer);

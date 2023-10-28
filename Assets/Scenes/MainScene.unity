@@ -4794,8 +4794,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharaArray:
-  - {fileID: 6314013918142501494, guid: 59c608cd366797e419a5bd3c991e1719, type: 3}
-  - {fileID: 6462073399661703336, guid: dd59fa032c2cd074dbab00505fd7b6c9, type: 3}
+  - {fileID: 8899804467248630146, guid: af9b32644e5028842b27920e6b5feaaf, type: 3}
+  - {fileID: 964119904415166560, guid: 23768b5f102a7934e94584a383d39f29, type: 3}
   setCharaNum: 0
   upgradeNum: 0
   strongTileChara: 0

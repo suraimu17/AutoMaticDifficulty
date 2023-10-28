@@ -124,23 +124,19 @@ namespace UI
 
                     RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, 10);
                     
-                    if (hit.collider == null/*||hit.collider.isTrigger==false*/) return;
-
-                    if (hit.collider.tag == "Chara")
-                    {
-                        Debug.Log("取得");
-                        upgradeUI.OpenCharaPanel(hit.collider.gameObject);
-                    }
-                  /*  foreach (RaycastHit2D hitAll in Physics2D.RaycastAll((Vector2)ray.origin, (Vector2)ray.direction, 10)) {
+                    if (hit.collider == null) return;
+                    
+                    //複数コライダー対策
+                    foreach (RaycastHit2D hitAll in Physics2D.RaycastAll((Vector2)ray.origin, (Vector2)ray.direction, 10)) {
                         Debug.Log("当たったやつ"+hitAll.collider.gameObject);
-                        if (hitAll.collider == null || hitAll.collider.isTrigger == true) return;
+                        if (hitAll.collider == null) return;
 
-                        if (hitAll.collider.tag == "Chara")
+                        if (hitAll.collider.tag == "Chara"&&hitAll.collider.name=="TouchCollider")
                         {
                             Debug.Log("取得");
                             upgradeUI.OpenCharaPanel(hitAll.collider.gameObject.transform.parent.gameObject);
                         }
-                    }*/
+                    }
                 })
                 .AddTo(this);
         }
