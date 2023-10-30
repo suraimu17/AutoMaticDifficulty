@@ -26,7 +26,10 @@ public class MagicCharaAttack : MonoBehaviour,ICharaAttack
         shotIns.UpdateAsObservable()
             .Subscribe(_ =>
             {
-                if (enemy == null) Destroy(shotIns);
+                if (enemy == null) { 
+                    Destroy(shotIns);
+                    return;
+                    };
                 shotIns.transform.position = Vector2.MoveTowards(
                     shotIns.transform.position,
                     new Vector2(enemy.transform.position.x, enemy.transform.position.y),

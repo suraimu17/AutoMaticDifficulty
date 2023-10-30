@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading;
+using Data;
 
 namespace Manager
 {
@@ -14,8 +15,13 @@ namespace Manager
         private EnemyGenerateManager enemyGenerateManager;
         private DifficultyManager difficultyManager;
         private StyleCheck styleCheck;
+        private UserData userData;
 
         public static GameManager Instance = null;
+
+        //âΩî‘ñ⁄ÇÃÉvÉåÉCÇ©
+        public int playerNum { private set; get; } = 1;
+
         private void Awake()
         {
             if (Instance == null)
@@ -30,7 +36,10 @@ namespace Manager
         {
             enemyGenerateManager = FindObjectOfType<EnemyGenerateManager>();
             difficultyManager = FindObjectOfType<DifficultyManager>();
+            userData = FindObjectOfType<UserData>();
+
             styleCheck = GetComponent<StyleCheck>();
+            
 
             CancellationToken token = this.GetCancellationTokenOnDestroy();
             StartWave(token);
@@ -55,6 +64,11 @@ namespace Manager
             //ìÔà’ìxí≤êÆîΩâf
             difficultyManager.reflectDifficulty();
             styleCheck.CheckStyle();
+            userData.Save(styleCheck.amountStylePer,
+                          styleCheck.strongStylePer,
+                          styleCheck.saveStylePer,
+                          styleCheck.GetStyle(),
+                          styleCheck.IsStyle);
 
             Debug.Log("wave2");
             await UniTask.Delay(System.TimeSpan.FromSeconds(5));

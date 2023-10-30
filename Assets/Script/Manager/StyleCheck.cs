@@ -15,7 +15,7 @@ public class StyleCheck : MonoBehaviour
     public bool amountStyle { private set; get; } = false;
     public bool strongStyle { private set; get; } = false;
     public bool saveStyle { private set; get; } = false;
-
+    public bool IsStyle { private set; get; } = true;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.D))
@@ -37,7 +37,7 @@ public class StyleCheck : MonoBehaviour
         Debug.Log("量スタイル割合:" + amountStylePer);
         Debug.Log("要所スタイル割合:" + strongStylePer);
         Debug.Log("様子見スタイル割合:" + saveStylePer);
-        /*
+        
         //１つのパターンに決めるときだけ使う
         if (amountStylePer > saveStylePer)
         {
@@ -47,7 +47,7 @@ public class StyleCheck : MonoBehaviour
         }
         else if (strongStylePer > saveStylePer) strongStyle = true;
         else saveStyle = true;
-        */
+        
     }   
     //どれだけキャラを置いているか
     private void CheckAmount() 
@@ -119,11 +119,21 @@ public class StyleCheck : MonoBehaviour
 
     private void CalStylePer() 
     {
-        if (amountStylePer < 0.4f && strongStylePer < 0.4f && saveStylePer < 0.4f) Debug.Log("どれも当てはまらない");
+        if (amountStylePer < 0.4f && strongStylePer < 0.4f && saveStylePer < 0.4f) IsStyle = false;
 
         var sumPer = amountStylePer + strongStylePer + saveStylePer;
         amountStylePer = amountStylePer / sumPer;
         strongStylePer = strongStylePer / sumPer;
         saveStylePer = saveStylePer / sumPer;
+    }
+
+    //文字列を返す
+    public string GetStyle() 
+    {
+        if (amountStyle == true) return "AmountStyle";
+        else if (strongStyle == true) return "StrongStyle";
+        else if (saveStyle == true) return "SaveStyle";
+
+        return null;
     }
 }

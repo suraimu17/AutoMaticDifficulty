@@ -79,7 +79,7 @@ namespace UI
 
                        charaManager.strongTileChara = tileMapCheck.GetStrongTile(charaManager.strongTileChara,grid,tilemap);
                        charaManager.setCharaNum++;
-                       Debug.Log("‚¢‚¢Š‚ÌƒLƒƒƒ‰"+charaManager.strongTileChara);
+                       //Debug.Log("‚¢‚¢Š‚ÌƒLƒƒƒ‰"+charaManager.strongTileChara);
                     }
                 })
                 .AddTo(this);
