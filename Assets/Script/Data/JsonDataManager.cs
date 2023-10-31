@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Data {
     public static class JsonDataManager
     {
-        private static string getFilePath() { return Application.dataPath + "/UserData" + ".json"; }
+        private static string getFilePath() { return Application.persistentDataPath + "/UserData" + ".json"; }
 
         /// <summary>
         /// シリアライズするデータ
@@ -17,11 +17,6 @@ namespace Data {
             string jsonSerializedData = JsonUtility.ToJson(playerDataWrapper);
             Debug.Log(jsonSerializedData);
 
-           /* //ファイルの書き出し
-            StreamWriter writer = new StreamWriter(Application.dataPath + "/savedata.json",false);
-            writer.Write(jsonSerializedData);
-            writer.Flush();
-            writer.Close();*/
 
             //ファイルの読み込み
             using (var sw = new StreamWriter(getFilePath(), false)) 

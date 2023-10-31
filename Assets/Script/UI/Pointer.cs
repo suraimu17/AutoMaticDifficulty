@@ -68,18 +68,20 @@ namespace UI
                         CurrentPutChara = charaManager.GetChoiceChara();
                         if (CurrentPutChara == null) return;
 
+                        var price = CurrentPutChara.GetComponent<CharaStatus>().buyCost;
+                        if (coinManager.CurrentCoin - price < 0) return;
+
                         gridChara = new Vector3(gridChara.x + AdjustX, gridChara.y + AdjustY, gridChara.z);
                         if (checkList(gridChara) == false) return;
-                        //値段仮置き
-                        var price = CurrentPutChara.GetComponent<CharaStatus>().buyCost;
-                    if (coinManager.BuyChara(price) == false) return;
 
-                       var obj= Instantiate(CurrentPutChara, gridChara, Quaternion.identity);
-                       obj.name = CurrentPutChara.name;
 
-                       charaManager.strongTileChara = tileMapCheck.GetStrongTile(charaManager.strongTileChara,grid,tilemap);
-                       charaManager.setCharaNum++;
-                       //Debug.Log("いい所のキャラ"+charaManager.strongTileChara);
+                        coinManager.BuyChara(price);
+ 
+                        var obj= Instantiate(CurrentPutChara, gridChara, Quaternion.identity);
+                        obj.name = CurrentPutChara.name;
+
+                        charaManager.strongTileChara = tileMapCheck.GetStrongTile(charaManager.strongTileChara,grid,tilemap);
+                        charaManager.setCharaNum++;
                     }
                 })
                 .AddTo(this);
@@ -133,7 +135,6 @@ namespace UI
 
                         if (hitAll.collider.tag == "Chara"&&hitAll.collider.name=="TouchCollider")
                         {
-                            Debug.Log("取得");
                             upgradeUI.OpenCharaPanel(hitAll.collider.gameObject.transform.parent.gameObject);
                         }
                     }

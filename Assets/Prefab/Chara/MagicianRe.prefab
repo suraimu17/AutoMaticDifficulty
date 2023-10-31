@@ -260,5 +260,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6398e525e1a4e7468a33e248f9eb74c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shot: {fileID: 5831896384586281063, guid: 87a85e1439ee8714590a1c8c4dae87f3, type: 3}
+  shot: {fileID: 7263778651622882797, guid: a44cfaf5ef0914c4ba9640e43fd931ab, type: 3}
   shotSpeed: 2

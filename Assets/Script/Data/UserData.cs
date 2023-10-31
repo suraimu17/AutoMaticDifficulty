@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Manager;
 
 namespace Data {
     public class UserData : MonoBehaviour
     {
-        private GameManager gameManager => GameManager.Instance;
+        private DifficultyManager difficultManager;
 
         private void Start()
         {
+            difficultManager = FindObjectOfType<DifficultyManager>();
             var player = load();
             //Debug.Log(player.DataList[0].amountStylePer);
         }
@@ -27,7 +26,7 @@ namespace Data {
             saveData.saveStylePer = savePer;
             saveData.playerStyle = style;
             saveData.IsStyle=IsStyle;
-
+            saveData.difficluty = difficultManager.difficulty;
 
             playerDataWrapper.DataList.Add(saveData);
 

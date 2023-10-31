@@ -39,8 +39,8 @@ namespace Manager
             CancellationToken token = this.GetCancellationTokenOnDestroy();
             difficultyManager = FindObjectOfType<DifficultyManager>();
 
-             GenerateObservable();
-             //GenerateAsync(token);
+             //GenerateObservable();
+             GenerateAsync(token);
         }
         private void RandomGenerateEnemy()
         {
@@ -95,14 +95,18 @@ namespace Manager
             {
                 await UniTask.Delay(System.TimeSpan.FromSeconds(3.0f),cancellationToken:token);
                 IsPattern = true;
+
+                //パターン選定して
                 var spawnNum = Random.Range(0, releasePos);
                 TankPattern(3, spawnNum,token);
+
                 IsPattern = false;
                 await UniTask.Delay(System.TimeSpan.FromSeconds(3.0f),cancellationToken: token);
                 
             }
 
         }
+        //タンクパターン
         public async UniTaskVoid TankPattern(int num, int generateNum,CancellationToken token) //asyncにする
         {
 
@@ -115,6 +119,9 @@ namespace Manager
             }
 
         }
+
+
+
         public void SetGenerateSpan(float difficulty)
         {
             if (difficulty > 0.5f) generateSpan -= Mathf.Abs((0.5f - difficulty) * 2);

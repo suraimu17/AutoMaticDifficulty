@@ -37,6 +37,10 @@ namespace Data
         /// </summary>
         public bool IsStyle;
 
+        /// <summary>
+        /// “ïˆÕ“x
+        /// </summary>
+        public float difficluty;
     }
 
     [Serializable]
