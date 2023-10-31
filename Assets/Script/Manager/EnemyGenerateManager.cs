@@ -29,7 +29,7 @@ namespace Manager
 
         public int releasePos=1;
         public int releaseEnemy=1;
-        private void Start()
+        private void Awake()
         {
             for (int i = 0; i < enemy.Length; i++) 
             {
@@ -63,6 +63,7 @@ namespace Manager
         public void GenerateEnemy(int enemyNum,int spawnNum)
         {
             var enemyIns =Instantiate(enemy[enemyNum], generatePoint[spawnNum].position, Quaternion.identity);
+            coinManager.canGetCoin += enemyIns.GetComponent<TestEnemyController>().coinNum;
 
             enemyIns.OnDestroyAsObservable()
                 .Subscribe(_ =>
@@ -82,8 +83,10 @@ namespace Manager
                 .Where(_=>IsPattern==false)
                 .Subscribe(_ =>
                 {
-                    if (generateCount == 1&&releaseEnemy==5&&difficultyManager.difficulty>0.5f) GenerateEnemy(5, 0);
-                    else RandomGenerateEnemy();
+                    //Bossパターン
+                    //if (generateCount == 1&&releaseEnemy==5&&difficultyManager.difficulty>0.5f) GenerateEnemy(5, 0);
+                   // RandomGenerateEnemy();
+                    GenerateEnemy(1, 0);
                 })
                 .AddTo(this);
         }
@@ -91,15 +94,15 @@ namespace Manager
         private async UniTaskVoid GenerateAsync(CancellationToken token) 
         {
             
-            while (true)
+            while (generateCount>0)
             {
                 await UniTask.Delay(System.TimeSpan.FromSeconds(3.0f),cancellationToken:token);
                 IsPattern = true;
 
                 //パターン選定して
                 var spawnNum = Random.Range(0, releasePos);
-                TankPattern(3, spawnNum,token);
-
+                TankPattern(spawnNum,token);
+                AllPattern(2,token);
                 IsPattern = false;
                 await UniTask.Delay(System.TimeSpan.FromSeconds(3.0f),cancellationToken: token);
                 
@@ -107,19 +110,43 @@ namespace Manager
 
         }
         //タンクパターン
-        public async UniTaskVoid TankPattern(int num, int generateNum,CancellationToken token) //asyncにする
+        public async UniTaskVoid TankPattern(int generateNum,CancellationToken token) 
         {
 
             GenerateEnemy(1,generateNum);
 
-            for (int i = 0; i < num - 1; i++)
+            for (int i = 0; i <  2; i++)
             {
                 await UniTask.Delay(System.TimeSpan.FromSeconds(1.5f),cancellationToken:token);
                 GenerateEnemy(0, generateNum);
             }
 
         }
+        //全方位パターン 
+        public async UniTaskVoid AllPattern(int generateEnemyNum, CancellationToken token)
+        {
 
+            for (int i = 0; i < 3; i++)
+            {
+                GenerateEnemy(generateEnemyNum, i);
+            }
+
+        }
+        //キャラいっぱい対応 タンクタンク、雑魚、スピード
+        public async UniTaskVoid OnePattern(int generateNum, CancellationToken token)
+        {
+
+            for (int i = 0; i < 2; i++)
+            {
+                GenerateEnemy(1, generateNum);
+                await UniTask.Delay(System.TimeSpan.FromSeconds(1.5f), cancellationToken: token);
+            }
+            GenerateEnemy(0, generateNum);
+            await UniTask.Delay(System.TimeSpan.FromSeconds(2f), cancellationToken: token);
+
+            GenerateEnemy(2, generateNum);
+
+        }
 
 
         public void SetGenerateSpan(float difficulty)

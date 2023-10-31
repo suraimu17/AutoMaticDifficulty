@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1284417651589322080}
   - component: {fileID: 3273978400259158132}
   m_Layer: 0
-  m_Name: MagicianRe
+  m_Name: Magician
   m_TagString: Chara
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

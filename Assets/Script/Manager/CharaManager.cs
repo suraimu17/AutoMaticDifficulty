@@ -8,7 +8,7 @@ namespace Manager
     {
         [SerializeField] private GameObject[] CharaArray;
         //ƒLƒƒƒ‰‚Ì‘½‚³‚É‚æ‚Á‚Ä•Ï‚¦‚é
-        public bool[] CharaChoise { get; private set; } = new bool[2];
+        public bool[] CharaChoise { get; private set; } = new bool[3];
 
         public static CharaManager Instance = null;
 

@@ -24,6 +24,7 @@ namespace Enemy.Test
 
         private void Update()
         {
+           // Debug.Log("‚Ä‚¥‚Á‚­"+target);
             enemyMover.EnemyMove(target);
         }
 

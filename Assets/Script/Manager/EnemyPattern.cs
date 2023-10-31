@@ -8,7 +8,11 @@ namespace Manager
 {
     public class EnemyPattern : MonoBehaviour
     {
+        public enum GeneratePattern 
+        {
+            Tank,//ƒ^ƒ“ƒN
 
+        }
 
 
 

@@ -17,14 +17,9 @@ public class CharaButton : MonoBehaviour
         charaManager.ResetCharaChoice();
         charaManager.CharaChoise[1] = true;
     }
-   /* public void ChoiceChara3()
+    public void ChoiceChara3()
     {
         charaManager.ResetCharaChoice();
         charaManager.CharaChoise[2] = true;
     }
-    public void ChoiceChara4()
-    {
-        charaManager.ResetCharaChoice();
-        charaManager.CharaChoise[3] = true;
-    }*/
 }
