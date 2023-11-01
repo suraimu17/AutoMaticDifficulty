@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 using Manager;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 
 namespace UI
 {
@@ -9,20 +11,35 @@ namespace UI
     {
         GameManager gameManager => GameManager.Instance;
         private Text waveText;
+
+        private GameObject child;
         private void Start()
         {
-            waveText = GetComponent<Text>();
-            WaveUIObservable();
-        }
-        private void WaveUIObservable()
-        {
-            this.ObserveEveryValueChanged(_ => gameManager.waveNum)
-                .Subscribe(_ =>
-                {
-                    waveText.text = "Wave:" + gameManager.waveNum;
-                })
-                .AddTo(this);
+            child = transform.GetChild(0).gameObject;
+            waveText =child.GetComponent<Text>();
 
+            CancellationToken token = this.GetCancellationTokenOnDestroy();
+
+             WaveUIObservable(token);
+        }
+        private async UniTaskVoid WaveUIObservable(CancellationToken token)
+        {
+            Debug.Log("!");
+            child.SetActive(true);
+
+            await UniTask.Delay(System.TimeSpan.FromSeconds(2.0f), cancellationToken: token);
+
+            child.SetActive(false);
+
+            await UniTask.WaitUntil(() => gameManager.waveNum == 2);
+
+            waveText.text = "Wave:" + gameManager.waveNum;
+
+            child.SetActive(true);
+
+            await UniTask.Delay(System.TimeSpan.FromSeconds(2.0f), cancellationToken: token);
+
+            child.SetActive(false);
         }
     }
 }

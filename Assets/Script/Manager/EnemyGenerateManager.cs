@@ -50,7 +50,7 @@ namespace Manager
             var enemyIns=Instantiate(enemy[enemyNum], generatePoint[spawnNum].position, Quaternion.identity);
 
             coinManager.canGetCoin += enemyIns.GetComponent<TestEnemyController>().coinNum;
-            //Debug.Log("maxCoin"+coinManager.canGetCoin);
+            Debug.Log("maxCoin"+coinManager.canGetCoin);
 
             enemyIns.OnDestroyAsObservable()
                 .Subscribe(_ =>
@@ -85,8 +85,8 @@ namespace Manager
                 {
                     //Bossパターン
                     //if (generateCount == 1&&releaseEnemy==5&&difficultyManager.difficulty>0.5f) GenerateEnemy(5, 0);
-                   // RandomGenerateEnemy();
-                    GenerateEnemy(1, 0);
+                    RandomGenerateEnemy();
+                    //GenerateEnemy(1, 0);
                 })
                 .AddTo(this);
         }
@@ -101,8 +101,9 @@ namespace Manager
 
                 //パターン選定して
                 var spawnNum = Random.Range(0, releasePos);
-                TankPattern(spawnNum,token);
-                AllPattern(2,token);
+                //OnePattern(1, token);
+                TankPattern(0, token);
+
                 IsPattern = false;
                 await UniTask.Delay(System.TimeSpan.FromSeconds(3.0f),cancellationToken: token);
                 
@@ -139,10 +140,10 @@ namespace Manager
             for (int i = 0; i < 2; i++)
             {
                 GenerateEnemy(1, generateNum);
-                await UniTask.Delay(System.TimeSpan.FromSeconds(1.5f), cancellationToken: token);
+                await UniTask.Delay(System.TimeSpan.FromSeconds(2f), cancellationToken: token);
             }
             GenerateEnemy(0, generateNum);
-            await UniTask.Delay(System.TimeSpan.FromSeconds(2f), cancellationToken: token);
+            await UniTask.Delay(System.TimeSpan.FromSeconds(3f), cancellationToken: token);
 
             GenerateEnemy(2, generateNum);
 
