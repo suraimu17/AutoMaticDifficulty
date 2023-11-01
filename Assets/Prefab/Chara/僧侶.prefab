@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4587717203585128462}
   - component: {fileID: -2525898708375038557}
   m_Layer: 0
-  m_Name: Sister
+  m_Name: "\u50E7\u4FB6"
   m_TagString: Chara
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
