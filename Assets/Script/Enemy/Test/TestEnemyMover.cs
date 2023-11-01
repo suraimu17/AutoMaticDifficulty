@@ -13,7 +13,6 @@ namespace Enemy.Test
         }
         public void EnemyMove(Transform target)
         {
-            Debug.Log("nullCheck"+agent);
             agent.destination = target.position;
         }
     }

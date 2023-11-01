@@ -39,8 +39,8 @@ namespace Manager
             CancellationToken token = this.GetCancellationTokenOnDestroy();
             difficultyManager = FindObjectOfType<DifficultyManager>();
 
-             //GenerateObservable();
-             GenerateAsync(token);
+             GenerateObservable();
+             //GenerateAsync(token);
         }
         private void RandomGenerateEnemy()
         {
