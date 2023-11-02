@@ -8,6 +8,7 @@ public class TestCharaAttack : MonoBehaviour,ICharaAttack
     [SerializeField] private GameObject slash;
     public void Attack(GameObject enemy,float attackPower) 
     {
+        if (enemy == null) return;
         var slashIns = Instantiate(slash, enemy.transform.position, Quaternion.identity);
 
         //è’ìÀèàóù
@@ -17,9 +18,8 @@ public class TestCharaAttack : MonoBehaviour,ICharaAttack
             {
                 var enemyHp = enemy.GetComponent<IEnemyHp>();
                 enemyHp.DecreaseHp(attackPower);
-                Destroy(slashIns,0.5f);
             })
             .AddTo(this);
-
+        Destroy(slashIns, 1.0f);
     }
 }

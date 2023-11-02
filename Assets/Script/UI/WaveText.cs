@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UniRx;
 using Manager;
 using Cysharp.Threading.Tasks;
 using System.Threading;
@@ -24,7 +23,6 @@ namespace UI
         }
         private async UniTaskVoid WaveUIObservable(CancellationToken token)
         {
-            Debug.Log("!");
             child.SetActive(true);
 
             await UniTask.Delay(System.TimeSpan.FromSeconds(2.0f), cancellationToken: token);
@@ -33,7 +31,7 @@ namespace UI
 
             await UniTask.WaitUntil(() => gameManager.waveNum == 2);
 
-            waveText.text = "Wave:" + gameManager.waveNum;
+            waveText.text = "Wave " + gameManager.waveNum;
 
             child.SetActive(true);
 

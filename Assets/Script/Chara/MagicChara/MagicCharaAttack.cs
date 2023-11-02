@@ -9,6 +9,7 @@ public class MagicCharaAttack : MonoBehaviour,ICharaAttack
     [field:SerializeField]private float shotSpeed = 1.5f;
     public void Attack(GameObject enemy,float attackPower) 
     {
+        if (enemy == null) return;
         var shotIns=Instantiate(shot, this.transform.position, Quaternion.identity);
 
         //Õ“Ëˆ—

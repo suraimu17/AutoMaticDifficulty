@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharaSearch : MonoBehaviour
 {
-    private List<GameObject> enemyList = new List<GameObject>();
+    [SerializeField]private List<GameObject> enemyList = new List<GameObject>();
 
     private GameObject targetEnemy;
 
@@ -22,8 +22,6 @@ public class CharaSearch : MonoBehaviour
 
                 targetEnemy = enemy;
             }
-
-
         }
 
         return targetEnemy;
@@ -33,7 +31,7 @@ public class CharaSearch : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") && !enemyList.Contains(collision.gameObject))
         {
-            Debug.Log("ìGî≠å©");
+            //Debug.Log("ìGî≠å©");
             enemyList.Add(collision.gameObject);
             //âºíuÇ´
             targetEnemy = collision.gameObject;
@@ -44,6 +42,7 @@ public class CharaSearch : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") && enemyList.Contains(collision.gameObject))
         {
             enemyList.Remove(collision.gameObject);
+            //Debug.Log("äOèoÇΩ");
         }
     }
 }

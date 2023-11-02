@@ -5,13 +5,13 @@ using UnityEngine;
 namespace Data {
     public static class JsonDataManager
     {
-        private static string getFilePath() { return Application.persistentDataPath + "/UserData" + ".json"; }
+        private static string getFilePath() { return Application.dataPath + "/UserData" + ".json"; }
 
         /// <summary>
         /// シリアライズするデータ
         /// </summary>
         /// <param name="playerDataWrapper"></param>
-        public static void Save(PlayerDataWrapper playerDataWrapper) 
+        public static void Save(PlayerDataWrapper playerDataWrapper)
         {
             //シリアライズ
             string jsonSerializedData = JsonUtility.ToJson(playerDataWrapper);

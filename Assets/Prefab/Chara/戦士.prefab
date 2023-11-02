@@ -152,7 +152,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.8
 --- !u!114 &964119904415166568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,9 +177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30207c37522e28409c461174cfc6948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <power>k__BackingField: 4
+  <power>k__BackingField: 5
   <upgradeCost>k__BackingField: 10
-  <buyCost>k__BackingField: 5
+  <buyCost>k__BackingField: 6
   upgradeObj: {fileID: 7121434433456133600, guid: 0cde243a36c3af14aa274d8e78c038db, type: 3}
 --- !u!1 &6110496792147393304
 GameObject:

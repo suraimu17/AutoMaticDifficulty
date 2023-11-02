@@ -60,6 +60,8 @@ namespace Manager
             enemyGenerateManager.releaseEnemy++;
 
             await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount == 0,cancellationToken:token);
+            //Wave2‚É“ü‚é
+
             waveNum++;
             //“ïˆÕ“x’²®”½‰f
             difficultyManager.reflectDifficulty();
@@ -70,12 +72,11 @@ namespace Manager
                           styleCheck.GetStyle(),
                           styleCheck.IsStyle);
 
-            Debug.Log("wave2");
             await UniTask.Delay(System.TimeSpan.FromSeconds(5));
             enemyGenerateManager.ResetData();
  
 
-            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount == 0, cancellationToken: token);
+            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount < 0, cancellationToken: token);
             await UniTask.Delay(System.TimeSpan.FromSeconds(2));
 
             SceneManager.LoadScene("EndScene");

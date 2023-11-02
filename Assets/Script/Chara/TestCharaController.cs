@@ -12,6 +12,7 @@ public class TestCharaController:MonoBehaviour,ICharaController
 
     private GameObject targetEnemy;
 
+    private bool IsArea = false;
     private void Start()
     {
         charaAttack = GetComponent<ICharaAttack>();
@@ -28,10 +29,11 @@ public class TestCharaController:MonoBehaviour,ICharaController
     {
         this.UpdateAsObservable()
             .ThrottleFirst(System.TimeSpan.FromSeconds(1))
+            .Where(_=>targetEnemy!=null)
             .Subscribe(_ =>
             {
-                //targetEnemy = facilitySearch.FindNearerstEnemy();
-                if (targetEnemy == null) return;
+
+                Debug.Log("í«è]" + targetEnemy);
                 //Debug.Log("ìGÇÕÇ¢ÇΩ");
 
                 charaAttack.Attack(targetEnemy, charaStatus.power);
