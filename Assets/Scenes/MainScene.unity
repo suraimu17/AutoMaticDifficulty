@@ -3238,9 +3238,16 @@ MonoBehaviour:
   - 1
   - 1
   - 1
+  generatePosList:
+  - 1
+  - 0
+  - 0
+  enemyList:
+  - 1
+  - 0
+  - 0
   IsRun: 0
   IsPattern: 0
-  releasePos: 1
   releaseEnemy: 1
 --- !u!4 &609471678
 Transform:

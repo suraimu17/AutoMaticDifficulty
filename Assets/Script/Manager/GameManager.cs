@@ -39,7 +39,12 @@ namespace Manager
             userData = FindObjectOfType<UserData>();
 
             styleCheck = GetComponent<StyleCheck>();
-            
+
+            var playerDataWrapper = userData.load();
+            if (playerDataWrapper.DataList.Count != 0)
+            {
+                playerNum = playerDataWrapper.DataList[playerDataWrapper.DataList.Count - 1].playerNum + 1;
+            }
 
             CancellationToken token = this.GetCancellationTokenOnDestroy();
             StartWave(token);
@@ -52,14 +57,14 @@ namespace Manager
             Debug.Log("start");
             enemyGenerateManager.IsRun = true;
 
-            await UniTask.WaitUntil(() => enemyGenerateManager.generateCount ==15, cancellationToken: token);
-            enemyGenerateManager.releasePos++;
-            enemyGenerateManager.releaseEnemy++;
-            await UniTask.WaitUntil(() => enemyGenerateManager.generateCount == 8, cancellationToken: token);
-            enemyGenerateManager.releasePos++;
-            enemyGenerateManager.releaseEnemy++;
+            await UniTask.WaitUntil(() => enemyGenerateManager.generateCount <=15, cancellationToken: token);
+            enemyGenerateManager.SetReleaseGeneratePos(1);
+            enemyGenerateManager.SetReleaseEnemy(1);
+            await UniTask.WaitUntil(() => enemyGenerateManager.generateCount <= 8, cancellationToken: token);
+            enemyGenerateManager.SetReleaseGeneratePos(2);
+            enemyGenerateManager.SetReleaseEnemy(2);
 
-            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount == 0,cancellationToken:token);
+            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount <= 0,cancellationToken:token);
             //Wave2‚É“ü‚é
 
             waveNum++;
@@ -76,7 +81,7 @@ namespace Manager
             enemyGenerateManager.ResetData();
  
 
-            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount < 0, cancellationToken: token);
+            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount <= 0, cancellationToken: token);
             await UniTask.Delay(System.TimeSpan.FromSeconds(2));
 
             SceneManager.LoadScene("EndScene");

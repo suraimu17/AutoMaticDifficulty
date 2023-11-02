@@ -12,7 +12,7 @@ public class TestCharaController:MonoBehaviour,ICharaController
 
     private GameObject targetEnemy;
 
-    private bool IsArea = false;
+    //private bool IsArea = false;
     private void Start()
     {
         charaAttack = GetComponent<ICharaAttack>();

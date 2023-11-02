@@ -31,7 +31,6 @@ namespace Manager
         {
             adjustDifficulty();
             enemyGenerateManager.SetGenerateSpan(difficulty);
-            enemyGenerateManager.SetReleaseEnemy(difficulty);
         }
 
 

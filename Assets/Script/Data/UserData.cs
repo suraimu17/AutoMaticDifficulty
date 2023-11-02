@@ -5,11 +5,10 @@ namespace Data {
     public class UserData : MonoBehaviour
     {
         private DifficultyManager difficultManager;
-
+        private GameManager gameManager=>GameManager.Instance;
         private void Start()
         {
             difficultManager = FindObjectOfType<DifficultyManager>();
-            var player = load();
             //Debug.Log(player.DataList[0].amountStylePer);
         }
         public void Save(float amountPer,float strongPer,float savePer,string style,bool IsStyle) 
@@ -19,7 +18,7 @@ namespace Data {
 
             //  ÉfÅ[É^ÇÃí«â¡
             if (playerDataWrapper.DataList.Count==0) saveData.playerNum = 1;
-            else saveData.playerNum = playerDataWrapper.DataList[playerDataWrapper.DataList.Count - 1].playerNum + 1;
+            else saveData.playerNum = gameManager.playerNum;
 
             saveData.amountStylePer = amountPer;
             saveData.strongStylePer = strongPer;

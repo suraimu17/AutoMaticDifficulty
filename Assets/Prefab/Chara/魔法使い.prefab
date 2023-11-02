@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55dce7d08ebb54747bc415faaa8c0d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyList: []
 --- !u!114 &5436301361541711441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,9 +245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30207c37522e28409c461174cfc6948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <power>k__BackingField: 2
+  <power>k__BackingField: 3
   <upgradeCost>k__BackingField: 7
-  <buyCost>k__BackingField: 4
+  <buyCost>k__BackingField: 3
   upgradeObj: {fileID: 3185310100085111387, guid: 3d1918ec128af0a478455cd912767677, type: 3}
 --- !u!114 &3273978400259158132
 MonoBehaviour:
