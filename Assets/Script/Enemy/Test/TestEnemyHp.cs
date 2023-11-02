@@ -10,7 +10,7 @@ namespace Enemy.Test
 {
     public class TestEnemyHp : MonoBehaviour, IEnemyHp
     {
-        public int enemyHp { private set; get; }
+        public float enemyHp { private set; get; }
         [SerializeField]private int baseHp;
         public bool IsDead => enemyHp <= 0;
         private int coinNum=> GetComponent<TestEnemyController>().coinNum;
@@ -22,10 +22,11 @@ namespace Enemy.Test
             DeathObservable();
             HpBarObservable();
         }
-        public void DecreaseHp(int facilityPower)
+        public void DecreaseHp(float charaPower)
         {
-            enemyHp -= facilityPower;
-            Debug.Log("ƒ_ƒ[ƒW");
+            enemyHp -= charaPower;
+
+            if (enemyHp <= 0) coinManager.DropCoin(coinNum);
         }
 
         private void DeathObservable()
@@ -34,8 +35,6 @@ namespace Enemy.Test
                 .Where(_ => IsDead == true)
                 .Subscribe(_ =>
                 {
-                    //Dropˆ—//‰Šú‚Å”½‰‚µ‚Ä‚µ‚Ü‚¤
-                    coinManager.DropCoin(coinNum);
                     Destroy(this.gameObject);
                 })
                 .AddTo(this);
@@ -54,7 +53,6 @@ namespace Enemy.Test
 
                     var hpBar = child.GetComponent<Slider>();
                     hpBar.value = (float)enemyHp / (float)baseHp;
-                    Debug.Log((float)enemyHp / (float)baseHp);
 
                 })
                 .AddTo(this);

@@ -11,9 +11,9 @@ namespace Enemy.Test
         private IEnemyHp testEnemyHp;
         private BaseHP baseHP;
 
-        
+        [SerializeField] private bool IsBoss;
         public Transform target;
-        public int coinNum = 1;
+        public int coinNum;
 
         private void Start()
         {
@@ -24,6 +24,7 @@ namespace Enemy.Test
 
         private void Update()
         {
+           // Debug.Log("‚Ä‚¥‚Á‚­"+target);
             enemyMover.EnemyMove(target);
         }
 
@@ -34,7 +35,8 @@ namespace Enemy.Test
                 baseHP = collision.GetComponent<BaseHP>();
                 if (baseHP == null) return;
 
-                baseHP.DecreaseHp();
+                if (IsBoss == true) baseHP.DecreaseBossHp();
+                else baseHP.DecreaseHp();
                 Destroy(gameObject);
             }
         }
