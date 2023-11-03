@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b18a86b3e14c840a9d87302bbf71ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsBoss: 0
+  <IsBoss>k__BackingField: 1
   target: {fileID: 0}
   coinNum: 1
 --- !u!114 &8610600599608883337

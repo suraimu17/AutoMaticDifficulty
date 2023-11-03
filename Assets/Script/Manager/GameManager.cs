@@ -18,7 +18,7 @@ namespace Manager
         private UserData userData;
 
         public static GameManager Instance = null;
-
+        public bool HadBoss  = false;
         //‰½”Ô–Ú‚ÌƒvƒŒƒC‚©
         public int playerNum { private set; get; } = 1;
 
@@ -85,7 +85,7 @@ namespace Manager
             enemyGenerateManager.ResetData();
  
 
-            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount <= 0, cancellationToken: token);
+            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount <= 0&&HadBoss==true, cancellationToken: token);
             await UniTask.Delay(System.TimeSpan.FromSeconds(2));
 
             SceneManager.LoadScene("EndScene");

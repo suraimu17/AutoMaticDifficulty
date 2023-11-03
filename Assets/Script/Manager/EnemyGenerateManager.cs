@@ -49,6 +49,7 @@ namespace Manager
             difficultyManager = FindObjectOfType<DifficultyManager>();
             styleCheck = FindObjectOfType<StyleCheck>();
             aliveTimeList= new List<float>();
+            GenerateEnemy(3, 1);
 
         GenerateObservable();
             GenerateAsync(token);
@@ -67,8 +68,9 @@ namespace Manager
                 .Subscribe(_ =>
                 {
                     enemyDeathCount--;
+                    //if (enemyIns.GetComponent<TestEnemyController>().IsBoss == true) gameManager.HadBoss = true;
                     aliveTimeList.Add(enemyIns.GetComponent<TestEnemyController>().aliveTime);
-                    Debug.Log("time"+ enemyIns.GetComponent<TestEnemyController>().aliveTime);
+                    Debug.Log("time" + enemyIns.GetComponent<TestEnemyController>().aliveTime);
                 })
                 .AddTo(this);
             generateCount--;
@@ -98,7 +100,7 @@ namespace Manager
                 {
                     Debug.Log("¶¬");
                     if (generateCount == 1&&difficultyManager.difficulty>0.5f&&gameManager.waveNum==2) GenerateEnemy(3, 1);
-                    RandomGenerateEnemy();
+                    else RandomGenerateEnemy();
                 })
                 .AddTo(this);
         }
