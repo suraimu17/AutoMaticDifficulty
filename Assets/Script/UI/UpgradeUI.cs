@@ -29,6 +29,7 @@ namespace UI
             else upgradeButton.gameObject.SetActive(true);
             UIUpdate(chara);
             upgradeButton.onClick.AddListener(charaStatus.Upgrade);
+            upgradeButton.onClick.AddListener(()=>UIUpdate(chara));
 
             //upgradeButton.onClick.AddListener(()=>UIUpdate(chara));
 
@@ -38,7 +39,8 @@ namespace UI
         public void UIUpdate(GameObject chara)
         {
             var charaStatus = chara.gameObject.GetComponent<CharaStatus>();
-
+            if (charaStatus.level == 2) upgradeButton.gameObject.SetActive(false);
+            else upgradeButton.gameObject.SetActive(true);
             charaImage.sprite = chara.gameObject.GetComponent<SpriteRenderer>().sprite;
             powerText.text = "çUåÇóÕÅF" + charaStatus.power;
             nameText.text = "" + chara.name;

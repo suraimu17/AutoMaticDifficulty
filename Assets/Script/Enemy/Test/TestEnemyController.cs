@@ -15,6 +15,8 @@ namespace Enemy.Test
         public Transform target;
         public int coinNum;
 
+        public float aliveTime { private set; get; } = 0;
+
         private void Start()
         {
             enemyMover = GetComponent<TestEnemyMover>();
@@ -26,6 +28,7 @@ namespace Enemy.Test
         {
            // Debug.Log("‚Ä‚¥‚Á‚­"+target);
             enemyMover.EnemyMove(target);
+            aliveTime += Time.deltaTime;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

@@ -58,9 +58,11 @@ namespace Manager
             enemyGenerateManager.IsRun = true;
 
             await UniTask.WaitUntil(() => enemyGenerateManager.generateCount <=15, cancellationToken: token);
-            enemyGenerateManager.SetReleaseGeneratePos(1);
+            enemyGenerateManager.SetReleaseGeneratePos(0);
+            Debug.Log("‰ğ•ú");
             enemyGenerateManager.SetReleaseEnemy(1);
             await UniTask.WaitUntil(() => enemyGenerateManager.generateCount <= 8, cancellationToken: token);
+            styleCheck.checkCoinPer();
             enemyGenerateManager.SetReleaseGeneratePos(2);
             enemyGenerateManager.SetReleaseEnemy(2);
 
@@ -68,6 +70,7 @@ namespace Manager
             //Wave2‚É“ü‚é
 
             waveNum++;
+            enemyGenerateManager.SetEnemyObj();
             //“ïˆÕ“x’²®”½‰f
             difficultyManager.reflectDifficulty();
             styleCheck.CheckStyle();
@@ -76,6 +79,7 @@ namespace Manager
                           styleCheck.saveStylePer,
                           styleCheck.GetStyle(),
                           styleCheck.IsStyle);
+            enemyGenerateManager.SetPatternProbability();
 
             await UniTask.Delay(System.TimeSpan.FromSeconds(5));
             enemyGenerateManager.ResetData();

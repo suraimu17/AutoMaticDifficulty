@@ -12,6 +12,7 @@ namespace Enemy.Test
     {
         public float enemyHp { private set; get; }
         [SerializeField]private int baseHp;
+        [SerializeField]private float multiHp;
         public bool IsDead => enemyHp <= 0;
         private int coinNum=> GetComponent<TestEnemyController>().coinNum;
 
@@ -29,6 +30,10 @@ namespace Enemy.Test
             if (enemyHp <= 0) coinManager.DropCoin(coinNum);
         }
 
+        public void SetEnemyHp() 
+        {
+            enemyHp = (int)(baseHp * multiHp);
+        }
         private void DeathObservable()
         {
             this.ObserveEveryValueChanged(_ => IsDead)

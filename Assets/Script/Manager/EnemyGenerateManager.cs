@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx.Triggers;
 using UniRx;
+using Enemy;
 using Enemy.Test;
 using Cysharp.Threading.Tasks;
 using System.Threading;
@@ -20,15 +21,18 @@ namespace Manager
         [field:SerializeField]private float[] generatePosList;
         [field:SerializeField]private float[] enemyList;
 
+        public List<float> aliveTimeList;
+
         private WeightedChooser weightedChooser;
         private DifficultyManager difficultyManager;
-        private GameManager gameManager;
+        private GameManager gameManager => GameManager.Instance;
+        private StyleCheck styleCheck;
         private CoinManager coinManager => CoinManager.Instance;
         public bool IsRun = false;
         public bool IsPattern = false;
 
-        private float generateSpan = 5.0f;
-        private float patternSpan = 10.0f;
+        private float generateSpan = 8.0f;
+        private float patternSpan = 14.0f;
         public int generateCount { get; private set; } = MaxGenerateNum;
         public int enemyDeathCount { get; private set; } = MaxGenerateNum;
         private const int MaxGenerateNum= 20;
@@ -43,25 +47,28 @@ namespace Manager
 
             CancellationToken token = this.GetCancellationTokenOnDestroy();
             difficultyManager = FindObjectOfType<DifficultyManager>();
-            gameManager = FindObjectOfType<GameManager>();
+            styleCheck = FindObjectOfType<StyleCheck>();
+            aliveTimeList= new List<float>();
 
-            GenerateObservable();
+        GenerateObservable();
             GenerateAsync(token);
         }
         private void RandomGenerateEnemy()
         {
-            var spawnNum = Random.Range(0, LotGeneratePos());
-            var enemyNum = Random.Range(0, LotEnemy());
+            var spawnNum = LotGeneratePos();
+            var enemyNum = LotEnemy();
 
             var enemyIns=Instantiate(enemy[enemyNum], generatePoint[spawnNum].position, Quaternion.identity);
 
             coinManager.canGetCoin += enemyIns.GetComponent<TestEnemyController>().coinNum;
-            Debug.Log("maxCoin"+coinManager.canGetCoin);
+            //Debug.Log("maxCoin"+coinManager.canGetCoin);
 
             enemyIns.OnDestroyAsObservable()
                 .Subscribe(_ =>
                 {
                     enemyDeathCount--;
+                    aliveTimeList.Add(enemyIns.GetComponent<TestEnemyController>().aliveTime);
+                    Debug.Log("time"+ enemyIns.GetComponent<TestEnemyController>().aliveTime);
                 })
                 .AddTo(this);
             generateCount--;
@@ -75,11 +82,11 @@ namespace Manager
                 .Subscribe(_ =>
                 {
                     enemyDeathCount--;
+                    aliveTimeList.Add(enemyIns.GetComponent<TestEnemyController>().aliveTime);
                 })
                 .AddTo(this);
             generateCount--;
         }
-        //Wave1
         private void GenerateObservable()
         {
             this.UpdateAsObservable()
@@ -90,13 +97,11 @@ namespace Manager
                 .Subscribe(_ =>
                 {
                     Debug.Log("生成");
-                    //Bossパターン
-                    //if (generateCount == 1&&releaseEnemy==5&&difficultyManager.difficulty>0.5f) GenerateEnemy(5, 0);
+                    if (generateCount == 1&&difficultyManager.difficulty>0.5f&&gameManager.waveNum==2) GenerateEnemy(3, 1);
                     RandomGenerateEnemy();
                 })
                 .AddTo(this);
         }
-        //Wave2
         private async UniTaskVoid GenerateAsync(CancellationToken token) 
         {
             while (true)
@@ -105,7 +110,6 @@ namespace Manager
                 if (generateCount < 5||(gameManager.waveNum == 1 && MaxGenerateNum - generateCount<5))continue;
 
                 IsPattern = true;
-                //パターン選定して
 
                 GetPattern(LotPattern(),token,LotGeneratePos());
                 await UniTask.Delay(System.TimeSpan.FromSeconds(2.0f), cancellationToken: token);
@@ -129,14 +133,14 @@ namespace Manager
                 case 2://要所と量対応 Tank,Tank,雑魚 Speed
                       OnePattern(generatePos, token);
                     break;
-                case 3://量対応キャラを置く人　
-                      AllStrongPattern(token);
+                case 3://量対応キャラを置く人　 スピード、タンクタンク、スピード
+                    TankSpeedPattern(generatePos, token);
                     break;
                 case 4://様子見対応 スピード全方位
-                    AllPattern(2);
+                      AllPattern(2);
                     break;
                 case 5://難易度強い時　
-                    AllStrongPattern(token);
+                      AllStrongPattern(token);
                     break;
 
                 default:
@@ -154,7 +158,7 @@ namespace Manager
 
             for (int i = 0; i <  2; i++)
             {
-                await UniTask.Delay(System.TimeSpan.FromSeconds(2f),cancellationToken:token);
+                await UniTask.Delay(System.TimeSpan.FromSeconds(4f),cancellationToken:token);
                 GenerateEnemy(0, generatePos);
             }
 
@@ -175,12 +179,26 @@ namespace Manager
             for (int i = 0; i < 2; i++)
             {
                 GenerateEnemy(1, generateNum);
-                await UniTask.Delay(System.TimeSpan.FromSeconds(2f), cancellationToken: token);
+                await UniTask.Delay(System.TimeSpan.FromSeconds(3f), cancellationToken: token);
             }
             GenerateEnemy(0, generateNum);
-            await UniTask.Delay(System.TimeSpan.FromSeconds(3f), cancellationToken: token);
+            await UniTask.Delay(System.TimeSpan.FromSeconds(4f), cancellationToken: token);
 
             GenerateEnemy(2, generateNum);
+
+        }
+        public async UniTaskVoid TankSpeedPattern(int generatePos, CancellationToken token)
+        {
+
+            GenerateEnemy(2, generatePos);
+
+            for (int i = 0; i < 2; i++)
+            {
+                await UniTask.Delay(System.TimeSpan.FromSeconds(3f), cancellationToken: token);
+                GenerateEnemy(1, generatePos);
+            }
+
+            GenerateEnemy(2, generatePos);
 
         }
         //全方位にいっぱい置く
@@ -218,26 +236,152 @@ namespace Manager
 
             return weightedChooser.Choose();
         }
+
+
         public void SetGenerateSpan(float difficulty)
         {
             if (difficulty > 0.5f) generateSpan -= Mathf.Abs((0.5f - difficulty) * 2);
-            else if (difficulty < 0.5f) generateSpan += (0.5f - difficulty) * 2;
+            else if (difficulty <= 0.5f) generateSpan += (0.5f - difficulty) * 2;
 
-            //パターンのスパンも変える
+            patternSpan -=  (4.0f * difficulty);
         }
         public void SetReleaseEnemy(int releaseNum)
         {
-            generatePosList[releaseNum] = 1;
+            enemyList[releaseNum] = 1;
+   
         }
         public void SetReleaseGeneratePos(int releaseNum)
         {
-            enemyList[releaseNum] = 1;
+            generatePosList[releaseNum] = 1;
         }
-        public void ResetData() 
+        public void SetEnemyObj() 
+        {
+            for (int i = 0; i < 3; i++) 
+            {
+                enemy[i].GetComponent<TestEnemyHp>().SetEnemyHp();
+            }
+        }
+        public void SetEgenerateProbability() 
+        {
+            var difficulty = difficultyManager.difficulty;
+            if (difficulty > 0.6)
+            {
+                generatePosList[0] *= 1.2f;
+                generatePosList[2] /= 1.5f;
+                
+            }
+            else if (difficulty < 0.3f) 
+            {
+                generatePosList[0] /= 1.5f;
+                generatePosList[2] *= 1.2f;
+            }
+        }
+        public void SetPatternProbability() 
+        {
+            var amountPer = styleCheck.amountStylePer;
+            var strongPer = styleCheck.strongStylePer;
+            var savePer = styleCheck.saveStylePer;
+
+            var difficulty = difficultyManager.difficulty;
+
+            for (int i = 0; i < patternList.Length ; i++)
+            {
+                patternList[i] = 1;
+            }
+            //すべての割合が近かった場合とスタイルの値がどれも低かった場合 確率は同じで解放していく
+            if ((amountPer - strongPer == Mathf.Abs(0.1f) && strongPer - savePer == Mathf.Abs(0.1f) && amountPer - savePer == Mathf.Abs(0.1f)) || styleCheck.IsStyle == false)
+            {
+                if (difficulty < 0.3f)
+                {
+                    for (int i = 3; i < patternList.Length - 1; i++)
+                    {
+                        patternList[i] = 0;
+                    }
+                }
+                else if (difficulty < 0.6f)
+                {
+                    patternList[patternList.Length - 1] = 0;
+                }
+            }
+            //量スタイルが多かった時
+            else if (styleCheck.amountStyle == true)
+            {
+                //難易度高い時は7割弱でスタイルをつくパターンと難しいのが出る予定
+                if (difficulty >= 0.6)
+                {
+                    patternList[1] /= 2;
+                    patternList[2] *= 2;
+                    patternList[3] *= 2;
+                    patternList[4] /= 2;
+                    patternList[5] *= 1.5f;
+                }
+                else if (difficulty <= 0.4)
+                {
+                    patternList[1] *= 2;
+                    patternList[2] /= 2;
+                    patternList[3] /= 2;
+                    patternList[4] *= 2;
+                    patternList[5] /= 1.5f;
+                }
+                else
+                {
+                    patternList[2] *= 2;
+                    patternList[3] *= 2;
+                }
+            }
+            else if (styleCheck.strongStyle == true)
+            {
+                if (difficulty >= 0.6)
+                {
+                    patternList[0] *= 2;
+                    patternList[1] /= 3;
+                    patternList[2] *= 2;
+                    patternList[5] *= 1.5f;
+                }
+                else if (difficulty <= 0.4)
+                {
+                    patternList[0] /= 2;
+                    patternList[1] *= 3;
+                    patternList[2] /= 2;
+                    patternList[5] /= 1.5f;
+                }
+                else
+                {
+                    patternList[0] *= 2;
+                    patternList[2] *= 2;
+                }
+            }
+            else if (styleCheck.saveStyle == true)
+            {
+                if (difficulty >= 0.6)
+                {
+                    patternList[0] /= 2;
+                    patternList[1] /= 2;
+                    patternList[3] *= 2;
+                    patternList[4] *= 2;
+                    patternList[5] *= 1.5f;
+                }
+                else if (difficulty <= 0.4)
+                {
+                    patternList[0] *= 2;
+                    patternList[1] *= 2;
+                    patternList[3] /= 2;
+                    patternList[4] /= 2;
+                    patternList[5] /= 1.5f;
+                }
+                else
+                {
+                    patternList[3] *= 2;
+                    patternList[4] *= 2;
+                }
+            }
+            else Debug.Log("セットできてない");
+        }
+        public void ResetData()
         {
             generateCount = MaxWave2GenerateNum;
             enemyDeathCount = MaxWave2GenerateNum;
         }
-        
+
     }
 }

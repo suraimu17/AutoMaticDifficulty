@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Base;
 using Enemy;
+using System.Linq;
 
 namespace Manager
 {
@@ -10,10 +11,10 @@ namespace Manager
     public class DifficultyManager : MonoBehaviour
     {
 
-        private const float baseDifficulty = 0.5f;
+        private const float baseDifficulty = 0f;
         public float difficulty { get; private set; }=baseDifficulty;
-        [SerializeField] AnimationCurve animationCoinCurve;
-        [SerializeField] AnimationCurve animationHpCurve;
+        [SerializeField] AnimationCurve animationCoinCurve;//y=x
+        [SerializeField] AnimationCurve animationHpCurve;//y=x*x
 
         private BaseHP baseHp;
 
@@ -36,17 +37,18 @@ namespace Manager
 
         public void adjustDifficulty() 
         {
-           // var charaNum = charaManager.setCharaNum;
+            // var charaNum = charaManager.setCharaNum
+            var average = enemyGenerateManager.aliveTimeList.Average();
+            var result = -((average / 28) * (average / 28)) + 1;
+            Debug.Log("timeAverage"+result);
 
             var coinPer = coinManager.CalCoinPer();
             var hpPer = ((float)baseHp.currentBaseHp / (float)baseHp.MaxBaseHp); ;
-            Debug.Log("coinPer"+coinPer);
             Debug.Log("hpPer"+hpPer);
 
-            difficulty +=( (animationCoinCurve.Evaluate(coinPer)-0.5f)+(animationHpCurve.Evaluate(hpPer)-0.5f))/2;
+            difficulty =(animationCoinCurve.Evaluate(coinPer)*0.4f)+(animationHpCurve.Evaluate(hpPer)*0.4f)+result*0.2f;
             Debug.Log("“ïˆÕ“x"+difficulty);
-            Debug.Log("CoinPer"+(animationCoinCurve.Evaluate(coinPer) - 0.5f)/2+ "HPPer"+ (animationHpCurve.Evaluate(hpPer) - 0.5f)/2);
-
+            Debug.Log("CoinPer"+ (animationCoinCurve.Evaluate(coinPer) * 0.4f) + "HPPer"+ (animationHpCurve.Evaluate(hpPer) * 0.4f)+"TimePer"+result*0.2f);
         }
 
         

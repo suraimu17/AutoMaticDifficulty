@@ -11,11 +11,15 @@ public class StyleCheck : MonoBehaviour
     public float strongStylePer { private set; get; } = 0;
     public float saveStylePer { private set; get; } = 0;
 
+    private float coinPer = 0;
+
     //１つのパターンに決めるときだけ使う
     public bool amountStyle { private set; get; } = false;
     public bool strongStyle { private set; get; } = false;
     public bool saveStyle { private set; get; } = false;
     public bool IsStyle { private set; get; } = true;
+
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.D))
@@ -70,7 +74,7 @@ public class StyleCheck : MonoBehaviour
     {
         float upgradeNum = charaManager.upgradeNum;
         //強さ
-        if (upgradeNum < 4)
+        if (upgradeNum < 3)
         {
             strongStylePer += (upgradeNum / 4) / 4;
         }
@@ -82,7 +86,7 @@ public class StyleCheck : MonoBehaviour
         //いい所
         float strongCharaNum = charaManager.strongTileChara;
 
-        if (strongCharaNum < 5)
+        if (strongCharaNum < 4)
         {
             strongStylePer += (strongCharaNum / 5) / 4;
         }
@@ -94,12 +98,14 @@ public class StyleCheck : MonoBehaviour
         Debug.Log("要所スタイル" + strongStylePer);
     }   
     //コインをためているか
-    private void CheckSave() 
+    public void CheckSave() 
     {
-        
-        float coinPer = coinManager.CalCoinPer();
+
+        coinPer += coinManager.CalCoinPer();
+        //平均化する
+        coinPer /= 2;
         Debug.Log("コイン割合"+coinPer);
-        if (coinPer < 0.40f)
+        if (coinPer < 0.3f)
         {
             saveStylePer = coinPer / 0.7f;
         }
@@ -110,6 +116,10 @@ public class StyleCheck : MonoBehaviour
         }
         Debug.Log("様子見スタイル" + saveStylePer);
     }
+    public void checkCoinPer() 
+    {
+        coinPer += coinManager.CalCoinPer();
+    }
     private void ResetStyle()
     {
         amountStyle = false;
@@ -119,7 +129,7 @@ public class StyleCheck : MonoBehaviour
 
     private void CalStylePer() 
     {
-        if (amountStylePer < 0.4f && strongStylePer < 0.4f && saveStylePer < 0.4f) IsStyle = false;
+        if (amountStylePer < 0.3f && strongStylePer < 0.3f && saveStylePer < 0.3f) IsStyle = false;
 
         var sumPer = amountStylePer + strongStylePer + saveStylePer;
         amountStylePer = amountStylePer / sumPer;

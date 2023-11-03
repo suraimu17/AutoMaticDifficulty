@@ -248,6 +248,7 @@ MonoBehaviour:
   <power>k__BackingField: 3
   <upgradeCost>k__BackingField: 7
   <buyCost>k__BackingField: 3
+  <multiPower>k__BackingField: 6
   upgradeObj: {fileID: 3185310100085111387, guid: 3d1918ec128af0a478455cd912767677, type: 3}
 --- !u!114 &3273978400259158132
 MonoBehaviour:

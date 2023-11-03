@@ -33,7 +33,7 @@ public class TestCharaController:MonoBehaviour,ICharaController
             .Subscribe(_ =>
             {
 
-                Debug.Log("í«è]" + targetEnemy);
+                //Debug.Log("í«è]" + targetEnemy);
                 //Debug.Log("ìGÇÕÇ¢ÇΩ");
 
                 charaAttack.Attack(targetEnemy, charaStatus.power);
