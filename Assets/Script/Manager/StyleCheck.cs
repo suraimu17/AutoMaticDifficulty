@@ -74,7 +74,7 @@ public class StyleCheck : MonoBehaviour
     {
         float upgradeNum = charaManager.upgradeNum;
         //‹­‚³
-        if (upgradeNum < 3)
+        if (upgradeNum < 2)
         {
             strongStylePer += (upgradeNum / 4) / 4;
         }
@@ -86,7 +86,7 @@ public class StyleCheck : MonoBehaviour
         //‚¢‚¢Š
         float strongCharaNum = charaManager.strongTileChara;
 
-        if (strongCharaNum < 4)
+        if (strongCharaNum < 3)
         {
             strongStylePer += (strongCharaNum / 5) / 4;
         }

@@ -9,7 +9,7 @@ namespace Manager
     {
         public static CoinManager Instance = null;
         public int CurrentCoin { get; private set; }
-        public int baseCoin { get; private set; } = 10;
+        public int baseCoin { get; private set; } = 12;
         //ウェーブで手に入れられるコイン
         public int canGetCoin = 0;
         private void Awake()

@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30207c37522e28409c461174cfc6948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <power>k__BackingField: 1000
+  <power>k__BackingField: 3
   <upgradeCost>k__BackingField: 7
   <buyCost>k__BackingField: 3
   <multiPower>k__BackingField: 6

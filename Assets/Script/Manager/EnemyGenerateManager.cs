@@ -31,8 +31,8 @@ namespace Manager
         public bool IsRun = false;
         public bool IsPattern = false;
 
-        private float generateSpan = 8.0f;
-        private float patternSpan = 14.0f;
+        private float generateSpan = 7.0f;
+        private float patternSpan = 12.0f;
         public int generateCount { get; private set; } = MaxGenerateNum;
         public int enemyDeathCount { get; private set; } = MaxGenerateNum;
         private const int MaxGenerateNum= 20;
@@ -49,10 +49,18 @@ namespace Manager
             difficultyManager = FindObjectOfType<DifficultyManager>();
             styleCheck = FindObjectOfType<StyleCheck>();
             aliveTimeList= new List<float>();
-            GenerateEnemy(3, 1);
 
-        GenerateObservable();
+
+            GenerateObservable();
             GenerateAsync(token);
+
+            this.ObserveEveryValueChanged(_=>enemyDeathCount)
+                .Where(_=>enemyDeathCount<0)
+                .Subscribe(_ =>
+                {
+                    enemyDeathCount = 0;
+                })
+                .AddTo(this);
         }
         private void RandomGenerateEnemy()
         {
@@ -110,7 +118,7 @@ namespace Manager
             {
                 await UniTask.Delay(System.TimeSpan.FromSeconds(2.0f), cancellationToken: token);
                 if (generateCount < 5||(gameManager.waveNum == 1 && MaxGenerateNum - generateCount<5))continue;
-
+                Debug.Log("pattern¶¬");
                 IsPattern = true;
 
                 GetPattern(LotPattern(),token,LotGeneratePos());
@@ -184,7 +192,7 @@ namespace Manager
                 await UniTask.Delay(System.TimeSpan.FromSeconds(3f), cancellationToken: token);
             }
             GenerateEnemy(0, generateNum);
-            await UniTask.Delay(System.TimeSpan.FromSeconds(4f), cancellationToken: token);
+            await UniTask.Delay(System.TimeSpan.FromSeconds(3f), cancellationToken: token);
 
             GenerateEnemy(2, generateNum);
 
@@ -245,7 +253,7 @@ namespace Manager
             if (difficulty > 0.5f) generateSpan -= Mathf.Abs((0.5f - difficulty) * 2);
             else if (difficulty <= 0.5f) generateSpan += (0.5f - difficulty) * 2;
 
-            patternSpan -=  (4.0f * difficulty);
+            patternSpan -=  (5.0f * difficulty);
         }
         public void SetReleaseEnemy(int releaseNum)
         {
@@ -255,13 +263,6 @@ namespace Manager
         public void SetReleaseGeneratePos(int releaseNum)
         {
             generatePosList[releaseNum] = 1;
-        }
-        public void SetEnemyObj() 
-        {
-            for (int i = 0; i < 3; i++) 
-            {
-                enemy[i].GetComponent<TestEnemyHp>().SetEnemyHp();
-            }
         }
         public void SetEgenerateProbability() 
         {

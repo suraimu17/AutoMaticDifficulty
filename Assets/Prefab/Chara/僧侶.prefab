@@ -167,7 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <power>k__BackingField: 7
   <upgradeCost>k__BackingField: 16
-  <buyCost>k__BackingField: 12
+  <buyCost>k__BackingField: 13
   <multiPower>k__BackingField: 12
   upgradeObj: {fileID: 7279015380857145494, guid: e874c1336ffffa644b18b4b9b9c11dfa, type: 3}
 --- !u!114 &-2525898708375038557
