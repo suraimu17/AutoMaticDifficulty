@@ -46,7 +46,7 @@ namespace Manager
             var hpPer = ((float)baseHp.currentBaseHp / (float)baseHp.MaxBaseHp); ;
             Debug.Log("hpPer"+hpPer);
 
-            difficulty =(animationCoinCurve.Evaluate(coinPer)*0.4f)+(animationHpCurve.Evaluate(hpPer)*0.4f)+result*0.2f;
+            difficulty =(animationCoinCurve.Evaluate(coinPer)*0.3f)+(animationHpCurve.Evaluate(hpPer)*0.5f)+result*0.2f;
             Debug.Log("“ïˆÕ“x"+difficulty);
             Debug.Log("CoinPer"+ (animationCoinCurve.Evaluate(coinPer) * 0.4f) + "HPPer"+ (animationHpCurve.Evaluate(hpPer) * 0.4f)+"TimePer"+result*0.2f);
         }
