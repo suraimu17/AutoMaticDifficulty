@@ -18,7 +18,7 @@ namespace Manager
         private UserData userData;
 
         public static GameManager Instance = null;
-
+        public bool HadBoss  = false;
         //‰½”Ô–Ú‚ÌƒvƒŒƒC‚©
         public int playerNum { private set; get; } = 1;
 
@@ -58,9 +58,11 @@ namespace Manager
             enemyGenerateManager.IsRun = true;
 
             await UniTask.WaitUntil(() => enemyGenerateManager.generateCount <=15, cancellationToken: token);
-            enemyGenerateManager.SetReleaseGeneratePos(1);
+            enemyGenerateManager.SetReleaseGeneratePos(0);
+            Debug.Log("‰ğ•ú");
             enemyGenerateManager.SetReleaseEnemy(1);
             await UniTask.WaitUntil(() => enemyGenerateManager.generateCount <= 8, cancellationToken: token);
+            styleCheck.checkCoinPer();
             enemyGenerateManager.SetReleaseGeneratePos(2);
             enemyGenerateManager.SetReleaseEnemy(2);
 
@@ -76,12 +78,13 @@ namespace Manager
                           styleCheck.saveStylePer,
                           styleCheck.GetStyle(),
                           styleCheck.IsStyle);
+            enemyGenerateManager.SetPatternProbability();
 
             await UniTask.Delay(System.TimeSpan.FromSeconds(5));
             enemyGenerateManager.ResetData();
  
 
-            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount <= 0, cancellationToken: token);
+            await UniTask.WaitUntil(() => enemyGenerateManager.enemyDeathCount <= 0||HadBoss==true, cancellationToken: token);
             await UniTask.Delay(System.TimeSpan.FromSeconds(2));
 
             SceneManager.LoadScene("EndScene");

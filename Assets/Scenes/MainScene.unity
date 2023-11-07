@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d11b6b62a60bd4184612d3f3b042fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HadBoss: 0
 --- !u!4 &16252680
 Transform:
   m_ObjectHideFlags: 0
@@ -272,7 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 40261970}
   m_Layer: 0
-  m_Name: GeneratorPointS
+  m_Name: GeneratorPointT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2913,7 +2914,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30B3\u30B9\u30C8\uFF1A12\n\n"
+  m_Text: "\u30B3\u30B9\u30C8\uFF1A13\n\n"
 --- !u!222 &420263596
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3223,32 +3224,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseTransform: {fileID: 1921530471}
   generatePoint:
+  - {fileID: 2013111112}
   - {fileID: 731520768}
   - {fileID: 40261970}
-  - {fileID: 2013111112}
   enemy:
   - {fileID: 1250918786040176696, guid: 24b177a330cf8444aabc4f9d4af9b363, type: 3}
   - {fileID: 4631774397830326856, guid: 380276ff31cceeb43b2caf212ffd2817, type: 3}
   - {fileID: 5822857468091785701, guid: 6db6543c9351d5b40a6206a449c6427f, type: 3}
-  - {fileID: 1250918786040176696, guid: 90bedf41d4c5e06479af606b0120d174, type: 3}
-  - {fileID: 4631774397830326856, guid: ae0ce10b3c063644593c8fa0073d37d3, type: 3}
-  - {fileID: 1250918786040176696, guid: 90bedf41d4c5e06479af606b0120d174, type: 3}
-  - {fileID: 4631774397830326856, guid: ae0ce10b3c063644593c8fa0073d37d3, type: 3}
+  - {fileID: 8610600599608883340, guid: a163107954b6f7b49b84da95d874a761, type: 3}
   patternList:
   - 1
   - 1
   - 1
-  generatePosList:
-  - 1
   - 0
+  - 0
+  - 0
+  generatePosList:
+  - 0
+  - 1
   - 0
   enemyList:
   - 1
   - 0
   - 0
+  aliveTimeList: []
   IsRun: 0
   IsPattern: 0
-  releaseEnemy: 1
 --- !u!4 &609471678
 Transform:
   m_ObjectHideFlags: 0
@@ -3377,7 +3378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 731520768}
   m_Layer: 0
-  m_Name: GeneratorPointF
+  m_Name: GeneratorPointS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4616,7 +4617,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30B3\u30B9\u30C8\uFF1A4\n"
+  m_Text: "\u30B3\u30B9\u30C8\uFF1A3\n"
 --- !u!222 &1293450020
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4696,7 +4697,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u653B\u6483\u529B\uFF1A6"
+  m_Text: "\u653B\u6483\u529B\uFF1A5\n"
 --- !u!222 &1311810107
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5029,20 +5030,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
+      inSlope: 2
+      outSlope: 2
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
+      time: 0.5
       value: 1
-      inSlope: 1
-      outSlope: 1
+      inSlope: 2
+      outSlope: 2
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -5059,15 +5060,6 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
-    - serializedVersion: 3
-      time: 0.7
-      value: 0.5
-      inSlope: 1.608499
-      outSlope: 1.608499
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.0979381
-      outWeight: 0.3685567
     - serializedVersion: 3
       time: 1
       value: 1
@@ -8549,7 +8541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2013111112}
   m_Layer: 0
-  m_Name: GeneratorPointT
+  m_Name: GeneratorPointF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

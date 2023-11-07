@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b18a86b3e14c840a9d87302bbf71ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsBoss: 0
+  <IsBoss>k__BackingField: 0
   target: {fileID: 0}
   coinNum: 1
 --- !u!114 &5822857468091785696
@@ -283,7 +283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b178524a771f0498ac856957f1919f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHp: 15
+  baseHp: 20
+  multiHp: 2
 --- !u!114 &5822857468091785697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed70c593ef1b1c547bca48dcea4a9035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 0.8
 --- !u!50 &5822857468091785700
 Rigidbody2D:
   serializedVersion: 4

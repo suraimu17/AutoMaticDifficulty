@@ -17,7 +17,7 @@ public class SceneChange : MonoBehaviour
         {
             if (Input.anyKey)
             {
-                SceneManager.LoadScene("MainScene");
+                SceneManager.LoadScene("ExplanationScene");
             }
         }
 

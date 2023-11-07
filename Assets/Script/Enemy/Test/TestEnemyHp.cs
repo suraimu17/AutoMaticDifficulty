@@ -10,15 +10,24 @@ namespace Enemy.Test
 {
     public class TestEnemyHp : MonoBehaviour, IEnemyHp
     {
-        public float enemyHp { private set; get; }
+        public float enemyHp { private set; get; } = 0;
         [SerializeField]private int baseHp;
+        [SerializeField]private float multiHp;
         public bool IsDead => enemyHp <= 0;
         private int coinNum=> GetComponent<TestEnemyController>().coinNum;
 
         private CoinManager coinManager => CoinManager.Instance;
+        private GameManager gameManager => GameManager.Instance;
         private void Start()
         {
-            enemyHp = baseHp;
+            if (gameManager.waveNum == 1)
+            {
+                enemyHp = baseHp;
+            }
+            else
+            {
+                enemyHp = baseHp * multiHp;
+            }
             DeathObservable();
             HpBarObservable();
         }
@@ -28,7 +37,6 @@ namespace Enemy.Test
 
             if (enemyHp <= 0) coinManager.DropCoin(coinNum);
         }
-
         private void DeathObservable()
         {
             this.ObserveEveryValueChanged(_ => IsDead)

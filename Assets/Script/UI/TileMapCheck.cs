@@ -20,15 +20,12 @@ namespace UI
                     if (i == 0 && k == 0) continue;
 
                     var newGrid = new Vector3Int(grid.x + i, grid.y + k, grid.z);
-                    //Debug.Log("調べるタイル"+newGrid);
                     //if (!tilemap.HasTile(newGrid)) contactRoad++;
                     if (tilemap.GetTile(newGrid)!=fieldTile) contactRoad++;
                 } 
             
             }
 
-
-            //Debug.Log("密接タイル" + contactRoad);
             if (contactRoad >= 5) return strongNum + 1;
 
             return strongNum;

@@ -2,6 +2,7 @@ using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
 using Base;
+using Manager;
 
 namespace Enemy.Test
 {
@@ -11,9 +12,12 @@ namespace Enemy.Test
         private IEnemyHp testEnemyHp;
         private BaseHP baseHP;
 
-        [SerializeField] private bool IsBoss;
+        [field:SerializeField] public bool IsBoss { private set; get; }
         public Transform target;
         public int coinNum;
+
+        GameManager gameManager => GameManager.Instance;
+        public float aliveTime { private set; get; } = 0;
 
         private void Start()
         {
@@ -24,8 +28,10 @@ namespace Enemy.Test
 
         private void Update()
         {
-           // Debug.Log("‚Ä‚¥‚Á‚­"+target);
             enemyMover.EnemyMove(target);
+            aliveTime += Time.deltaTime;
+
+            if (IsBoss == true && testEnemyHp.enemyHp <= 0) gameManager.HadBoss = true;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

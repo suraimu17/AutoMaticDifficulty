@@ -7,9 +7,10 @@ using Manager;
 public class CharaStatus : MonoBehaviour,ICharaStatus
 {
 
-    [field:SerializeField] public float power { get; private set; }
+    [field:SerializeField] public int power { get; private set; }
     [field:SerializeField] public int upgradeCost { get; private set; }
     [field:SerializeField] public int buyCost { get; private set; }
+    [field:SerializeField] public int multiPower { get; private set; }
 
     [SerializeField] private GameObject upgradeObj;
    //[SerializeField]private int nextCost;
@@ -21,7 +22,7 @@ public class CharaStatus : MonoBehaviour,ICharaStatus
     {
         if (CoinManager.Instance.BuyChara(upgradeCost) == true)
         {
-            power *= 1.5f;
+            power =multiPower;
             level++;
             this.gameObject.GetComponent<SpriteRenderer>().sprite = upgradeObj.GetComponent<SpriteRenderer>().sprite;
             charaManager.upgradeNum++;
